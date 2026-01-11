@@ -4,107 +4,38 @@
     <meta charset="UTF-8">
     <title>LOKALIZATOR ŁAP ROBOTÓW GRAMMER</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-        }
-
-        form {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        input[type="text"] {
-            padding: 10px;
-            width: 320px;
-            font-size: 16px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            background-color: #007bff;
-            color: white;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        h3 {
-            margin-top: 30px;
-        }
-
-        table {
-            border-collapse: collapse;
-            margin-top: 20px;
-            width: 100%;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        tr:nth-child(even) {
-            background-color: #fafafa;
-        }
-
-        .no-results {
-            margin-top: 20px;
-            font-weight: bold;
-            color: #c00;
-        }
-    </style>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <div class="container">
 
-    <h1>LOKALIZATOR ŁAP ROBOTÓW GRAMMER</h1>
+    <h1 style="text-align:center; margin-bottom:30px;">
+        LOKALIZATOR ŁAP ROBOTÓW GRAMMER
+    </h1>
 
-    <form method="get">
+    <form method="get" style="text-align:center;">
         <input
             type="text"
             name="q"
-            placeholder="Wpisz numer projektu (np. S11777)"
+            placeholder="Wpisz numer projektu, formy lub części"
             value="{{ query }}"
+            style="padding:12px; width:300px; font-size:16px;"
         >
-        <button type="submit">Szukaj</button>
+        <br><br>
+        <button
+            type="submit"
+            style="padding:12px 30px; font-size:16px; cursor:pointer;"
+        >
+            Szukaj
+        </button>
     </form>
 
     {% if query %}
-        <h3>Wyniki dla: „{{ query }}”</h3>
+        <h3 style="margin-top:30px;">
+            Wyniki dla: "{{ query }}"
+        </h3>
     {% endif %}
 
     {% if wynik and wynik|length > 0 %}
@@ -116,18 +47,24 @@
             </tr>
 
             {% for row in wynik %}
-                <tr>
-                    {% for value in row.values() %}
-                        <td>{{ value }}</td>
-                    {% endfor %}
-                </tr>
+            <tr>
+                {% for value in row.values() %}
+                    <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
             {% endfor %}
         </table>
     {% else %}
         {% if query %}
-            <div class="no-results">Brak wyników.</div>
+            <p><strong>Brak wyników.</strong></p>
         {% endif %}
     {% endif %}
+
+</div>
+
+</body>
+</html>
+
 
 </div>
 
