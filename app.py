@@ -3,15 +3,16 @@ import pandas as pd
 
 app = Flask(__name__)
 
+# wczytanie danych
 df = pd.read_excel("data.xlsx")
-df.columns = df.columns.str.strip()  # usuwa spacje z nagłówków
+df.columns = df.columns.str.strip()
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     wynik = None
+
     if request.method == "POST":
         robot_id = request.form["robot_id"]
-
         wynik = df[df["PROJEKT"] == robot_id]
 
         if wynik.empty:
@@ -19,11 +20,6 @@ def index():
 
     return render_template("index.html", wynik=wynik)
 
+
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-    return render_template("index.html", wynik=wynik)
-
-if __name__ == "__main__":
-    app.run()
