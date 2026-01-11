@@ -2,66 +2,47 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-
-    background-color: #0e0e0e;
+    background-color: #0f0f0f;
     background-image: url("/static/technik.png");
     background-repeat: no-repeat;
-    background-position: center top;
-    background-size: 300px;
+    background-position: center 40px;
+    background-size: 260px;
 }
 
 .container {
-    max-width: 1000px;
-    margin: 220px auto 40px auto;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    max-width: 900px;
+    margin: 320px auto 40px auto;
+    background: rgba(255, 255, 255, 0.96);
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    text-align: center;
 }
-
 
 h1 {
-    margin-bottom: 30px;
-}
-
-form {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
 }
 
 input[type="text"] {
-    width: 60%;
-    padding: 12px;
-    font-size: 18px;
-    border-radius: 6px;
+    width: 70%;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 8px;
     border: 1px solid #ccc;
 }
 
 button {
-    padding: 12px 20px;
-    font-size: 18px;
-    border: none;
-    border-radius: 6px;
-    background: #007bff;
+    margin-top: 20px;
+    padding: 14px 40px;
+    font-size: 16px;
+    background: #0d6efd;
     color: white;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
 }
 
 button:hover {
-    background: #0056b3;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th, td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background: #007bff;
-    color: white;
+    background: #084298;
 }
