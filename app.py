@@ -1,39 +1,32 @@
 from flask import Flask, render_template, request
 import pandas as pd
-import re
 
 app = Flask(__name__)
 
-# Wczytaj Excel
+# Wczytanie danych z Excela
 df = pd.read_excel("data.xlsx")
 
-# Weź PIERWSZĄ kolumnę z Excela (bez zgadywania nazw)
-KOLUMNA = df.columns[0]
+# Upewniamy się, że kolumna PROJEKT jest tekstem
+# ⬇️ ZMIEŃ NA DOKŁADNĄ NAZWĘ KOLUMNY Z EXCELA
+KOLUMNA_PROJEKT = "projekt"
 
-# Zamień na tekst
-df[KOLUMNA] = df[KOLUMNA].astype(str)
+df[KOLUMNA_PROJEKT] = df[KOLUMNA_PROJEKT].astype(str)
 
-def normalize(text):
-    text = text.lower()
-    text = re.sub(r"[^\w]", "", text)
-    return text
-
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET"])
 def index():
+    query = request.args.get("q", "").strip().lower()
+
     wynik = []
-    query = ""
 
-    if request.method == "POST":
-        query = request.form.get("query", "").strip()
-        query_norm = normalize(query)
+    if query:
+        mask = df[KOLUMNA_PROJEKT].str.lower().str.contains(query, na=False)
+        wynik = df[mask].to_dict(orient="records")
 
-        df["projekt_norm"] = df[KOLUMNA].apply(normalize)
-
-        # 🔑 startswith → wyszukiwanie bazowe projektu
-        wynik = df[df["projekt_norm"].str.startswith(query_norm)]
-        wynik = wynik.to_dict(orient="records")
-
-    return render_template("index.html", wynik=wynik, query=query)
+    return render_template(
+        "index.html",
+        wynik=wynik,
+        query=query
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)
