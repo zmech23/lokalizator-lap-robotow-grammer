@@ -5,41 +5,28 @@ import re
 app = Flask(__name__)
 
 PLIK_EXCEL = "data.xlsx"
+KOLUMNA_PROJEKT = "PROJEKT"
 
-# ===== WCZYTANIE =====
 df = pd.read_excel(PLIK_EXCEL)
-
-# automatycznie znajdź kolumnę projektu
-KOLUMNA_PROJEKT = None
-for col in df.columns:
-    if "projekt" in col.lower():
-        KOLUMNA_PROJEKT = col
-        break
-
-if KOLUMNA_PROJEKT is None:
-    raise Exception("Brak kolumny z projektem")
-
 df[KOLUMNA_PROJEKT] = df[KOLUMNA_PROJEKT].astype(str)
 
-# ===== FUNKCJE =====
-def wyciagnij_kod(txt):
-    txt = txt.lower()
-    match = re.search(r"s\d+", txt)
-    return match.group(0) if match else ""
+def normalizuj(text):
+    text = text.lower()
+    text = re.sub(r"[^a-z0-9]", "", text)  # usuwa spacje, nawiasy itd.
+    return text
 
-df["__kod__"] = df[KOLUMNA_PROJEKT].apply(wyciagnij_kod)
+# kolumna pomocnicza do wyszukiwania
+df["__norm"] = df[KOLUMNA_PROJEKT].apply(normalizuj)
 
 @app.route("/", methods=["GET"])
 def index():
-    query = request.args.get("q", "").strip().lower()
+    query = request.args.get("q", "").strip()
     wynik = []
 
     if query:
-        # użytkownik wpisuje np. s11777
-        kod = wyciagnij_kod(query)
-        if kod:
-            mask = df["__kod__"] == kod
-            wynik = df[mask].to_dict(orient="records")
+        q_norm = normalizuj(query)
+        mask = df["__norm"].str.contains(q_norm, na=False)
+        wynik = df[mask].drop(columns="__norm").to_dict(orient="records")
 
     return render_template("index.html", wynik=wynik, query=query)
 
