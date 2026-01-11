@@ -2,17 +2,36 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Lokalizator Łap Robotów</title>
+    <title>Lokalizator LAP</title>
 </head>
 <body>
+    <h1>Lokalizator LAP robotów</h1>
 
-<h1>🤖 Lokalizator Łap Robotów</h1>
-<p>Aplikacja działa poprawnie.</p>
+    <form method="post">
+        <input type="text" name="robot_id" placeholder="Wpisz numer projektu" required>
+        <button type="submit">Szukaj</button>
+    </form>
 
-<form method="post">
-    <input type="text" name="robot_id" placeholder="ID robota">
-    <button type="submit">Szukaj</button>
-</form>
-
+    {% if wynik is not none %}
+        {% if wynik.empty %}
+            <p><b>❌ Nie znaleziono projektu</b></p>
+        {% else %}
+            <h2>Wynik:</h2>
+            <table border="1" cellpadding="5">
+                <tr>
+                    <th>PROJEKT</th>
+                    <th>MIEJSCE</th>
+                    <th>SEKCJA</th>
+                </tr>
+                {% for _, row in wynik.iterrows() %}
+                <tr>
+                    <td>{{ row["PROJEKT"] }}</td>
+                    <td>{{ row["MIEJSCE"] }}</td>
+                    <td>{{ row["SEKCJA"] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    {% endif %}
 </body>
 </html>
