@@ -3,11 +3,7 @@ import pandas as pd
 
 app = Flask(__name__)
 
-# wczytanie Excela
 df = pd.read_excel("data.xlsx")
-
-# normalizacja kolumny PROJEKT
-df["PROJEKT"] = df["PROJEKT"].astype(str).str.strip().str.upper()
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -16,9 +12,7 @@ def index():
     if request.method == "POST":
         robot_id = request.form.get("robot_id")
 
-        if robot_id:
-            robot_id = robot_id.strip().upper()
-            wynik = df[df["PROJEKT"] == robot_id]
+        wynik = df[df["PROJEKT"].astype(str).str.contains(robot_id, case=False, na=False)]
 
     return render_template("index.html", wynik=wynik)
 
