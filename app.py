@@ -1,50 +1,35 @@
 from flask import Flask, render_template, request
 import pandas as pd
-import os
 import re
 
 app = Flask(__name__)
 
-# ====== ŚCIEŻKA DO PLIKU EXCEL ======
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-EXCEL_PATH = os.path.join(BASE_DIR, "data.xlsx")
+# wczytanie danych
+df = pd.read_excel("data.xlsx")
+df["projekt"] = df["projekt"].astype(str)
 
-# ====== WCZYTANIE DANYCH ======
-df = pd.read_excel(EXCEL_PATH)
-
-# normalizacja kolumn
-df.columns = df.columns.str.strip().str.upper()
-
-# ====== FUNKCJA NORMALIZUJĄCA ======
 def normalize(text):
-    if pd.isna(text):
-        return ""
-    text = str(text).upper()
-    text = re.sub(r"[()\s]", "", text)  # usuń spacje i nawiasy
+    """
+    Usuwa spacje, nawiasy i zamienia na małe litery
+    """
+    text = text.lower()
+    text = re.sub(r"[^\w]", "", text)  # usuwa spacje, nawiasy itp.
     return text
-
-# ====== DODAJ KOLUMNĘ TECHNICZNĄ ======
-df["_SEARCH"] = df.apply(
-    lambda row: " ".join(normalize(v) for v in row.values),
-    axis=1
-)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    wynik = None
+    wynik = []
     query = ""
 
     if request.method == "POST":
-        query = request.form.get("robot_id", "").strip().upper()
-        q_norm = normalize(query)
+        query = request.form.get("query", "").strip().lower()
+        query_norm = normalize(query)
 
-        wynik = df[df["_SEARCH"].str.startswith(q_norm)]
+        df["projekt_norm"] = df["projekt"].apply(normalize)
 
-    return render_template("index.html", wynik=wynik, query=query)
+        wynik = df[df["projekt_norm"].str.startswith(query_norm)]
 
-if __name__ == "__main__":
-    app.run(debug=True)
-
+        wynik = wynik.to_dict(orient="records")
 
     return render_template("index.html", wynik=wynik, query=query)
 
