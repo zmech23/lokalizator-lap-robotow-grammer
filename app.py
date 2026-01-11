@@ -1,41 +1,54 @@
 from flask import Flask, render_template, request
 import pandas as pd
 import re
-import os
 
 app = Flask(__name__)
 
-# === Wczytanie Excela ===
-EXCEL_PATH = os.path.join(os.path.dirname(__file__), "data.xlsx")
-df = pd.read_excel(EXCEL_PATH)
+# ===== Wczytanie Excela =====
+df = pd.read_excel("dane.xlsx")
 
-# === Funkcja normalizująca ===
-def clean(text):
-    return re.sub(r'[^a-z0-9]', '', str(text).lower())
+# ===== Funkcja czyszcząca tekst =====
+def clean_text(text):
+    if pd.isna(text):
+        return ""
+    text = str(text).lower()
+    text = re.sub(r"[^a-z0-9]", "", text)
+    return text
 
-# === Normalizacja kolumn ===
-df["PROJEKT_CLEAN"] = df["PROJEKT"].apply(clean)
-df["MIEJSCE_CLEAN"] = df["MIEJSCE"].apply(clean)
-df["SEKCJA_CLEAN"] = df["SEKCJA"].apply(clean)
+# ===== Czyszczenie wszystkich kolumn =====
+for col in df.columns:
+    df[col + "_CLEAN"] = df[col].apply(clean_text)
 
+# ===== Główna trasa =====
 @app.route("/", methods=["GET", "POST"])
 def index():
     wynik = None
-    zapytanie = ""
 
     if request.method == "POST":
-        zapytanie = request.form.get("robot_id", "")
-        szukane = clean(zapytanie)
+        query = request.form.get("robot_id", "").lower()
 
-        if szukane:
-            wynik = df[
-                df["PROJEKT_CLEAN"].str.contains(szukane) |
-                df["MIEJSCE_CLEAN"].str.contains(szukane) |
-                df["SEKCJA_CLEAN"].str.contains(szukane)
-            ]
+        # Rozbijamy zapytanie na tokeny (np s11777 sgm45)
+        tokens = re.findall(r"[a-z0-9]+", query)
 
-    return render_template("index.html", wynik=wynik, zapytanie=zapytanie)
+        mask = pd.Series([True] * len(df))
+
+        for token in tokens:
+            token = clean_text(token)
+
+            token_mask = False
+            for col in df.columns:
+                if col.endswith("_CLEAN"):
+                    token_mask = token_mask | df[col].str.contains(token, na=False)
+
+            mask = mask & token_mask
+
+        wynik = df[mask]
+
+        if wynik.empty:
+            wynik = None
+
+    return render_template("index.html", wynik=wynik)
+
 
 if __name__ == "__main__":
-    app.run(debug=True)
-
+    app.run()
