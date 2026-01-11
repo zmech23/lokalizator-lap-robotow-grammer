@@ -2,36 +2,40 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Lokalizator LAP</title>
+    <title>Lokalizator LAP robotów</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+
+<div class="container">
     <h1>Lokalizator LAP robotów</h1>
 
-    <form method="post">
+    <form method="POST">
         <input type="text" name="robot_id" placeholder="Wpisz numer projektu" required>
         <button type="submit">Szukaj</button>
     </form>
 
-    {% if wynik is not none %}
-        {% if wynik.empty %}
-            <p><b>❌ Nie znaleziono projektu</b></p>
-        {% else %}
-            <h2>Wynik:</h2>
-            <table border="1" cellpadding="5">
-                <tr>
-                    <th>PROJEKT</th>
-                    <th>MIEJSCE</th>
-                    <th>SEKCJA</th>
-                </tr>
-                {% for _, row in wynik.iterrows() %}
-                <tr>
-                    <td>{{ row["PROJEKT"] }}</td>
-                    <td>{{ row["MIEJSCE"] }}</td>
-                    <td>{{ row["SEKCJA"] }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        {% endif %}
+    {% if wynik is not none and not wynik.empty %}
+    <h2>Wynik:</h2>
+    <table>
+        <tr>
+            <th>PROJEKT</th>
+            <th>MIEJSCE</th>
+            <th>SEKCJA</th>
+        </tr>
+        {% for _, row in wynik.iterrows() %}
+        <tr>
+            <td>{{ row.PROJEKT }}</td>
+            <td>{{ row.MIEJSCE }}</td>
+            <td>{{ row.SEKCJA }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% elif wynik is not none %}
+        <p><b>Brak robota o podanym numerze.</b></p>
     {% endif %}
+</div>
+
 </body>
 </html>
+
