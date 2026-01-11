@@ -52,14 +52,18 @@
 <table>
     <tr>
         {% for key in wynik[0].keys() %}
-            <th>{{ key }}</th>
+            {% if key != "__search__" %}
+                <th>{{ key }}</th>
+            {% endif %}
         {% endfor %}
     </tr>
 
     {% for row in wynik %}
     <tr>
-        {% for value in row.values() %}
-            <td>{{ value }}</td>
+        {% for key, value in row.items() %}
+            {% if key != "__search__" %}
+                <td>{{ value }}</td>
+            {% endif %}
         {% endfor %}
     </tr>
     {% endfor %}
@@ -72,3 +76,4 @@
 
 </body>
 </html>
+
