@@ -1,59 +1,58 @@
 body {
     margin: 0;
     padding: 0;
-    background: #0f0f0f;
     font-family: Arial, sans-serif;
-    color: #000;
-}
-
-.app {
+    background: linear-gradient(180deg, #0f0f0f, #1c1c1c);
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-.title {
-    color: white;
-    margin-top: 40px;
-    margin-bottom: 30px;
-    font-size: 34px;
-    letter-spacing: 1px;
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
     text-align: center;
 }
 
-.hero img {
-    width: 260px;
-    max-width: 80%;
-    margin-bottom: 30px;
+h1 {
+    color: #ffffff;
+    margin-bottom: 140px;
+    letter-spacing: 1px;
 }
+
+/* ====== KARTA WYSZUKIWANIA ====== */
 
 .search-box {
-    background: white;
-    padding: 30px 40px;
+    background: rgba(255, 255, 255, 0.97);
+    padding: 40px;
     border-radius: 18px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+.search-box form {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .search-box input {
-    width: 320px;
-    max-width: 90%;
     padding: 14px;
+    width: 320px;
+    max-width: 100%;
     font-size: 16px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid #ccc;
 }
 
 .search-box button {
-    display: block;
-    margin: 20px auto 0 auto;
-    padding: 14px 40px;
+    padding: 14px 28px;
     font-size: 16px;
+    border-radius: 10px;
+    border: none;
     background: #0d6efd;
     color: white;
-    border: none;
-    border-radius: 8px;
     cursor: pointer;
 }
 
@@ -61,27 +60,45 @@ body {
     background: #084298;
 }
 
-.results {
-    margin: 40px auto;
-    width: 90%;
-    max-width: 1100px;
-    background: white;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+/* ====== TECHNIK WYSTAJĄCY Z KARTY ====== */
+
+.with-hero {
+    position: relative;
+    padding-top: 120px;
 }
+
+.hero-inside {
+    position: absolute;
+    top: -140px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    max-width: 90%;
+}
+
+/* ====== TABELA ====== */
 
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
 }
 
 th, td {
-    padding: 10px;
+    padding: 12px;
     border-bottom: 1px solid #ddd;
     text-align: left;
 }
 
 th {
-    background: #f3f3f3;
+    background: #f1f1f1;
+}
+
+/* ====== TEKST ====== */
+
+h3 {
+    color: #ffffff;
 }
