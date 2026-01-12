@@ -5,30 +5,72 @@
     <title>Lokalizator Łap Robotów Grammer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
-    <h1 class="page-title">
+    <!-- TŁO -->
+    <div class="background"></div>
+
+    <!-- TYTUŁ -->
+    <h1 class="title">
         LOKALIZATOR ŁAP ROBOTÓW GRAMMER
     </h1>
 
-    <div class="search-card">
-        <img src="{{ url_for('static', filename='technik.png') }}"
-             alt="Technik"
-             class="technik-img">
+    <!-- KARTA -->
+    <div class="card">
 
-        <form method="POST">
+        <!-- TECHNIK -->
+        <img
+            src="{{ url_for('static', filename='technik.png') }}"
+            alt="Technik"
+            class="technik"
+        >
+
+        <!-- FORMULARZ -->
+        <form method="POST" class="search-form">
             <input
                 type="text"
                 name="query"
                 placeholder="Wpisz numer projektu, formy lub części"
-                class="search-input"
+                value="{{ query }}"
+                required
             >
-            <button type="submit" class="search-button">
-                Szukaj
-            </button>
+            <button type="submit">Szukaj</button>
         </form>
+
+        <!-- WYNIKI -->
+        {% if query %}
+            <div class="results">
+
+                {% if wynik and wynik|length > 0 %}
+                    <table>
+                        <thead>
+                            <tr>
+                                {% for key in wynik[0].keys() %}
+                                    <th>{{ key }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in wynik %}
+                                <tr>
+                                    {% for value in row.values() %}
+                                        <td>{{ value }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="no-results">Brak wyników</p>
+                {% endif %}
+
+            </div>
+        {% endif %}
+
     </div>
 
 </body>
 </html>
+
 
