@@ -38,10 +38,10 @@ body {
 /* TECHNIK */
 .technik {
     position: absolute;
-    top: -90px;              /* NIE nachodzi na tytuł */
+    top: -80px;              /* NIE nachodzi na tytuł */
     left: 50%;
     transform: translateX(-50%);
-    width: 160px;            /* <<< IDEALNY ROZMIAR */
+    width: 170px;            /* <<< IDEALNY ROZMIAR */
     height: auto;
 }
 
