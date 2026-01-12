@@ -2,61 +2,32 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>LOKALIZATOR ŁAP ROBOTÓW GRAMMER</title>
+    <title>Lokalizator Łap Robotów Grammer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <h1 class="page-title">LOKALIZATOR ŁAP ROBOTÓW GRAMMER</h1>
+    <h1 class="page-title">
+        LOKALIZATOR ŁAP ROBOTÓW GRAMMER
+    </h1>
 
     <div class="search-card">
+        <img src="{{ url_for('static', filename='technik.png') }}"
+             alt="Technik"
+             class="technik-img">
 
-        <img
-            src="{{ url_for('static', filename='technik.png') }}"
-            alt="Technik"
-            class="technik-img"
-        >
-
-        <form method="get" class="search-form">
+        <form method="POST">
             <input
                 type="text"
-                name="q"
+                name="query"
                 placeholder="Wpisz numer projektu, formy lub części"
-                value="{{ query or '' }}"
+                class="search-input"
             >
-            <button type="submit">Szukaj</button>
+            <button type="submit" class="search-button">
+                Szukaj
+            </button>
         </form>
-
     </div>
-
-    {% if query %}
-        <h3 style="text-align:center; color:white; margin-top:40px;">
-            Wyniki dla: "{{ query }}"
-        </h3>
-    {% endif %}
-
-    {% if wynik and wynik|length > 0 %}
-        <table style="margin:30px auto; width:90%; background:white; border-radius:12px; overflow:hidden;">
-            <tr style="background:#f2f2f2;">
-                {% for key in wynik[0].keys() %}
-                    <th style="padding:10px;">{{ key }}</th>
-                {% endfor %}
-            </tr>
-            {% for row in wynik %}
-                <tr>
-                    {% for value in row.values() %}
-                        <td style="padding:10px; border-top:1px solid #ddd;">
-                            {{ value }}
-                        </td>
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-        </table>
-    {% elif query %}
-        <p style="text-align:center; color:white;">
-            <strong>Brak wyników.</strong>
-        </p>
-    {% endif %}
 
 </body>
 </html>
