@@ -7,15 +7,17 @@
 </head>
 <body>
 
-<div class="app">
+<div class="container">
 
-    <h1 class="title">LOKALIZATOR ŁAP ROBOTÓW GRAMMER</h1>
+    <h1>LOKALIZATOR ŁAP ROBOTÓW GRAMMER</h1>
 
-    <div class="hero">
-        <img src="{{ url_for('static', filename='technik.png') }}" alt="Technik">
-    </div>
+    <div class="search-box with-hero">
+        <img
+            src="{{ url_for('static', filename='technik.png') }}"
+            alt="Technik"
+            class="hero-inside"
+        >
 
-    <div class="search-box">
         <form method="get">
             <input
                 type="text"
@@ -27,23 +29,30 @@
         </form>
     </div>
 
-    {% if wynik %}
-    <div class="results">
+    {% if query %}
+        <h3>Wyniki dla: "{{ query }}"</h3>
+    {% endif %}
+
+    {% if wynik and wynik|length > 0 %}
         <table>
             <tr>
                 {% for key in wynik[0].keys() %}
                     <th>{{ key }}</th>
                 {% endfor %}
             </tr>
+
             {% for row in wynik %}
-            <tr>
-                {% for value in row.values() %}
-                    <td>{{ value }}</td>
-                {% endfor %}
-            </tr>
+                <tr>
+                    {% for value in row.values() %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
             {% endfor %}
         </table>
-    </div>
+    {% else %}
+        {% if query %}
+            <p><strong>Brak wyników.</strong></p>
+        {% endif %}
     {% endif %}
 
 </div>
