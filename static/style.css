@@ -41,7 +41,7 @@ body {
     top: -80px;              /* NIE nachodzi na tytuł */
     left: 50%;
     transform: translateX(-50%);
-    width: 170px;            /* <<< IDEALNY ROZMIAR */
+    width: 180px;            /* <<< IDEALNY ROZMIAR */
     height: auto;
 }
 
