@@ -21,67 +21,26 @@
             >
         </div>
 
+        <!-- JEDYNY FORMULARZ WYSZUKIWANIA -->
         <form method="get" class="search-form">
             <input
                 type="text"
                 name="q"
                 placeholder="Wpisz numer projektu, formy lub części"
-                value="{{ query or '' }}"
+                value="{{ query if query else '' }}"
             >
             <button type="submit">Szukaj</button>
         </form>
 
-    </div>
-
-</div>
-
-</body>
-</html>
-
-
-        <!-- FORMULARZ -->
-        <form method="POST" class="search-form">
-            <input
-                type="text"
-                name="query"
-                placeholder="Wpisz numer projektu, formy lub części"
-                value="{{ query }}"
-                required
-            >
-            <button type="submit">Szukaj</button>
-        </form>
-
-        <!-- WYNIKI -->
-        {% if query %}
+        {% if results %}
             <div class="results">
-
-                {% if wynik and wynik|length > 0 %}
-                    <table>
-                        <thead>
-                            <tr>
-                                {% for key in wynik[0].keys() %}
-                                    <th>{{ key }}</th>
-                                {% endfor %}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for row in wynik %}
-                                <tr>
-                                    {% for value in row.values() %}
-                                        <td>{{ value }}</td>
-                                    {% endfor %}
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                {% else %}
-                    <p class="no-results">Brak wyników</p>
-                {% endif %}
-
+                <!-- tutaj masz tabelę / wyniki -->
             </div>
         {% endif %}
 
     </div>
+
+</div>
 
 </body>
 </html>
