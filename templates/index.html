@@ -3,42 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Lokalizator Łap Robotów Grammer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- CSS Z FOLDERU static -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <div class="page-wrapper">
+    <h1 class="title">LOKALIZATOR ŁAP ROBOTÓW GRAMMER</h1>
 
-        <h1 class="main-title">
-            LOKALIZATOR ŁAP ROBOTÓW GRAMMER
-        </h1>
+    <div class="card">
+        <img src="{{ url_for('static', filename='technik.png') }}" class="technik">
 
-        <div class="search-box">
-
-            <!-- OBRAZEK TECHNIKA -->
-            <img 
-                src="{{ url_for('static', filename='technik.png') }}" 
-                alt="Technik" 
-                class="hero-inside"
+        <form method="get" class="search-box">
+            <input
+                type="text"
+                name="q"
+                placeholder="Wpisz numer projektu, formy lub części"
+                value="{{ query or '' }}"
             >
+            <button type="submit">Szukaj</button>
+        </form>
+    </div>
 
-            <form method="get">
-                <input
-                    type="text"
-                    name="q"
-                    placeholder="Wpisz numer projektu, formy lub części"
-                    value="{{ query }}"
-                >
-                <button type="submit">Szukaj</button>
-            </form>
-
-        </div>
-
-        {% if wynik %}
-        <div id="results">
+    {% if wynik %}
+        <div class="results">
             <table>
                 <tr>
                     {% for key in wynik[0].keys() %}
@@ -54,9 +40,7 @@
                 {% endfor %}
             </table>
         </div>
-        {% endif %}
-
-    </div>
+    {% endif %}
 
 </body>
 </html>
