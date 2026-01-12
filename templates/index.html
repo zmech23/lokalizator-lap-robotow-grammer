@@ -2,17 +2,22 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Lokalizator Łap Robotów Grammer</title>
+    <title>LOKALIZATOR ŁAP ROBOTÓW GRAMMER</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <h1 class="title">LOKALIZATOR ŁAP ROBOTÓW GRAMMER</h1>
+    <h1 class="page-title">LOKALIZATOR ŁAP ROBOTÓW GRAMMER</h1>
 
-    <div class="card">
-        <img src="{{ url_for('static', filename='technik.png') }}" class="technik">
+    <div class="search-card">
 
-        <form method="get" class="search-box">
+        <img
+            src="{{ url_for('static', filename='technik.png') }}"
+            alt="Technik"
+            class="technik-img"
+        >
+
+        <form method="get" class="search-form">
             <input
                 type="text"
                 name="q"
@@ -21,26 +26,38 @@
             >
             <button type="submit">Szukaj</button>
         </form>
+
     </div>
 
-    {% if wynik %}
-        <div class="results">
-            <table>
-                <tr>
-                    {% for key in wynik[0].keys() %}
-                        <th>{{ key }}</th>
-                    {% endfor %}
-                </tr>
-                {% for row in wynik %}
+    {% if query %}
+        <h3 style="text-align:center; color:white; margin-top:40px;">
+            Wyniki dla: "{{ query }}"
+        </h3>
+    {% endif %}
+
+    {% if wynik and wynik|length > 0 %}
+        <table style="margin:30px auto; width:90%; background:white; border-radius:12px; overflow:hidden;">
+            <tr style="background:#f2f2f2;">
+                {% for key in wynik[0].keys() %}
+                    <th style="padding:10px;">{{ key }}</th>
+                {% endfor %}
+            </tr>
+            {% for row in wynik %}
                 <tr>
                     {% for value in row.values() %}
-                        <td>{{ value }}</td>
+                        <td style="padding:10px; border-top:1px solid #ddd;">
+                            {{ value }}
+                        </td>
                     {% endfor %}
                 </tr>
-                {% endfor %}
-            </table>
-        </div>
+            {% endfor %}
+        </table>
+    {% elif query %}
+        <p style="text-align:center; color:white;">
+            <strong>Brak wyników.</strong>
+        </p>
     {% endif %}
 
 </body>
 </html>
+
