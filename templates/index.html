@@ -4,49 +4,59 @@
     <meta charset="UTF-8">
     <title>Lokalizator Łap Robotów Grammer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+
+    <!-- CSS Z FOLDERU static -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
     <div class="page-wrapper">
 
-        <!-- TYTUŁ -->
         <h1 class="main-title">
             LOKALIZATOR ŁAP ROBOTÓW GRAMMER
         </h1>
 
-        <!-- BIAŁA KARTA -->
         <div class="search-box">
 
-            <!-- TECHNIK -->
-            <img src="technik.png" alt="Technik" class="hero-inside">
+            <!-- OBRAZEK TECHNIKA -->
+            <img 
+                src="{{ url_for('static', filename='technik.png') }}" 
+                alt="Technik" 
+                class="hero-inside"
+            >
 
-            <!-- WYSZUKIWANIE -->
-            <form id="searchForm">
-                <input 
-                    type="text" 
-                    id="searchInput" 
+            <form method="get">
+                <input
+                    type="text"
+                    name="q"
                     placeholder="Wpisz numer projektu, formy lub części"
-                    autocomplete="off"
+                    value="{{ query }}"
                 >
                 <button type="submit">Szukaj</button>
             </form>
 
         </div>
 
-        <!-- WYNIKI -->
-        <div id="results"></div>
+        {% if wynik %}
+        <div id="results">
+            <table>
+                <tr>
+                    {% for key in wynik[0].keys() %}
+                        <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+                {% for row in wynik %}
+                <tr>
+                    {% for value in row.values() %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
 
     </div>
-
-    <script src="app.js"></script>
-</body>
-</html>
-
-
-
-
-</div>
 
 </body>
 </html>
