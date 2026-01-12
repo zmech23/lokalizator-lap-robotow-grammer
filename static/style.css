@@ -50,7 +50,7 @@ body {
 }
 
 .technician {
-    width: 160px;              /* ⬅️ TU JEST ROZMIAR */
+    width: 180px;              /* ⬅️ TU JEST ROZMIAR */
     display: block;
     margin: 0 auto;
     position: relative;
