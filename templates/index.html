@@ -3,49 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>LOKALIZATOR ŁAP ROBOTÓW GRAMMER</title>
-
-    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<div class="container">
+<div class="app">
 
-    <h1 style="text-align:center; margin-bottom:30px;">
-        LOKALIZATOR ŁAP ROBOTÓW GRAMMER
-    </h1>
+    <h1 class="title">LOKALIZATOR ŁAP ROBOTÓW GRAMMER</h1>
 
-    <form method="get" style="text-align:center;">
-        <input
-            type="text"
-            name="q"
-            placeholder="Wpisz numer projektu, formy lub części"
-            value="{{ query }}"
-            style="padding:12px; width:300px; font-size:16px;"
-        >
-        <br><br>
-        <button
-            type="submit"
-            style="padding:12px 30px; font-size:16px; cursor:pointer;"
-        >
-            Szukaj
-        </button>
-    </form>
+    <div class="hero">
+        <img src="{{ url_for('static', filename='technik.png') }}" alt="Technik">
+    </div>
 
-    {% if query %}
-        <h3 style="margin-top:30px;">
-            Wyniki dla: "{{ query }}"
-        </h3>
-    {% endif %}
+    <div class="search-box">
+        <form method="get">
+            <input
+                type="text"
+                name="q"
+                placeholder="Wpisz numer projektu, formy lub części"
+                value="{{ query }}"
+            >
+            <button type="submit">Szukaj</button>
+        </form>
+    </div>
 
-    {% if wynik and wynik|length > 0 %}
+    {% if wynik %}
+    <div class="results">
         <table>
             <tr>
                 {% for key in wynik[0].keys() %}
                     <th>{{ key }}</th>
                 {% endfor %}
             </tr>
-
             {% for row in wynik %}
             <tr>
                 {% for value in row.values() %}
@@ -54,16 +43,14 @@
             </tr>
             {% endfor %}
         </table>
-    {% else %}
-        {% if query %}
-            <p><strong>Brak wyników.</strong></p>
-        {% endif %}
+    </div>
     {% endif %}
 
 </div>
 
 </body>
 </html>
+
 
 
 </div>
