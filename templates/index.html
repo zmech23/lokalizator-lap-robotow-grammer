@@ -5,26 +5,39 @@
     <title>Lokalizator Łap Robotów Grammer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
 
-    <!-- TŁO -->
-    <div class="background"></div>
+<div class="page">
 
-    <!-- TYTUŁ -->
-    <h1 class="title">
-        LOKALIZATOR ŁAP ROBOTÓW GRAMMER
-    </h1>
+    <h1 class="title">LOKALIZATOR ŁAP ROBOTÓW GRAMMER</h1>
 
-    <!-- KARTA -->
     <div class="card">
 
-        <!-- TECHNIK -->
-        <img
-            src="{{ url_for('static', filename='technik.png') }}"
-            alt="Technik"
-            class="technik"
-        >
+        <div class="technician-wrapper">
+            <img
+                src="{{ url_for('static', filename='technik.png') }}"
+                alt="Technik"
+                class="technician"
+            >
+        </div>
+
+        <form method="get" class="search-form">
+            <input
+                type="text"
+                name="q"
+                placeholder="Wpisz numer projektu, formy lub części"
+                value="{{ query or '' }}"
+            >
+            <button type="submit">Szukaj</button>
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+
 
         <!-- FORMULARZ -->
         <form method="POST" class="search-form">
