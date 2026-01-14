@@ -2,44 +2,40 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Lokalizator Łap Robotów Grammer</title>
 
-    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#000000">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styl.css') }}">
 </head>
 
 <body>
 
 <script>
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/static/sw.js");
+  navigator.serviceWorker.register("/sw.js", { scope: "/" });
 }
 </script>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".accordion-header").forEach(header => {
-        header.addEventListener("click", function () {
-            const content = this.nextElementSibling;
-            const isOpen = content.style.display === "block";
+<h1>LOKALIZATOR ŁAP ROBOTÓW GRAMMER</h1>
 
-            document.querySelectorAll(".accordion-content").forEach(c => {
-                c.style.display = "none";
-            });
+<form method="get">
+    <input type="text" name="q" placeholder="Wpisz numer projektu">
+    <button type="submit">Szukaj</button>
+</form>
 
-            if (!isOpen) {
-                content.style.display = "block";
-            }
-        });
-    });
-});
-</script>
-
-<!-- reszta HTML bez zmian -->
+{% if results %}
+  {% for row in results %}
+    <div>
+      <strong>{{ row["PROJEKT"] }}</strong><br>
+      Miejsce: {{ row["MIEJSCE"] }}<br>
+      Sekcja: {{ row["SEKCJA"] }}
+    </div>
+    <hr>
+  {% endfor %}
+{% endif %}
 
 </body>
 </html>
