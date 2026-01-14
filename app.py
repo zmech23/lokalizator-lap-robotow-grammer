@@ -5,7 +5,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-EXCEL_PATH = os.path.join(BASE_DIR, "data", "data.xlsx")
+EXCEL_PATH = os.path.join(BASE_DIR, "data.xlsx")
 
 df = pd.read_excel(EXCEL_PATH)
 df = df.fillna("")
