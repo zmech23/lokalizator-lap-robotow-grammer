@@ -1,27 +1,27 @@
-import os
+from flask import Flask, render_template, request, send_from_directory
 import pandas as pd
-from flask import Flask, render_template, request
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="statyczny", template_folder="szablony")
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-EXCEL_PATH = os.path.join(BASE_DIR, "data.xlsx")
-
-df = pd.read_excel(EXCEL_PATH)
-df = df.fillna("")
-
-@app.route("/", methods=["GET"])
+@app.route("/")
 def index():
-    query = request.args.get("q", "").strip()
+    query = request.args.get("q", "")
     results = []
 
     if query:
-        mask = df.astype(str).apply(
-            lambda row: row.str.contains(query, case=False, na=False)
-        ).any(axis=1)
+        df = pd.read_excel("dane.xlsx")
+        mask = df.apply(
+            lambda row: row.astype(str).str.contains(query, case=False).any(),
+            axis=1
+        )
         results = df[mask].to_dict(orient="records")
 
-    return render_template("index.html", results=results, query=query)
+    return render_template("index.html", results=results)
+
+# 🔥 KLUCZOWA TRASA DLA PWA
+@app.route("/sw.js")
+def service_worker():
+    return send_from_directory(".", "sw.js", mimetype="application/javascript")
 
 if __name__ == "__main__":
     app.run(debug=True)
