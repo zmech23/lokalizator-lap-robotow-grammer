@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+<meta name="theme-color" content="#000000">
+
     <meta charset="UTF-8">
     <title>Lokalizator Łap Robotów Grammer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -33,6 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
     <body>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/static/sw.js");
+}
+</script>
 
 <div class="page">
 
