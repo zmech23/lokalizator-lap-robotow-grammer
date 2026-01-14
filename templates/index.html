@@ -6,6 +6,31 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const headers = document.querySelectorAll(".accordion-header");
+
+    headers.forEach(header => {
+        header.addEventListener("click", function () {
+
+            const content = this.nextElementSibling;
+            const isOpen = content.style.display === "block";
+
+            // zamknij wszystkie
+            document.querySelectorAll(".accordion-content").forEach(c => {
+                c.style.display = "none";
+            });
+
+            // otwórz tylko kliknięty (jeśli był zamknięty)
+            if (!isOpen) {
+                content.style.display = "block";
+            }
+        });
+    });
+
+});
+</script>
 
     <body>
 
