@@ -142,4 +142,30 @@ body {
         transform: translateY(0);
         opacity: 1;
     }
+.results {
+    margin-top: 30px;
+    overflow-x: auto;
+}
+
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.results-table th,
+.results-table td {
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.results-table th {
+    background: #1e73ff;
+    color: white;
+}
+
+.results-table tr:nth-child(even) {
+    background: #f5f7fa;
+}
 }
