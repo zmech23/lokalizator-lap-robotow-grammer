@@ -1,7 +1,11 @@
 from flask import Flask, render_template, request, send_from_directory
 import pandas as pd
 
-app = Flask(__name__, static_folder="statyczny", template_folder="szablony")
+app = Flask(
+    __name__,
+    static_folder="statyczny",
+    template_folder="szablony"
+)
 
 @app.route("/")
 def index():
@@ -18,7 +22,7 @@ def index():
 
     return render_template("index.html", results=results)
 
-# 🔥 KLUCZOWA TRASA DLA PWA
+# 🔥 PWA – Service Worker z ROOT
 @app.route("/sw.js")
 def service_worker():
     return send_from_directory(".", "sw.js", mimetype="application/javascript")
