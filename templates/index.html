@@ -62,30 +62,26 @@ document.addEventListener("DOMContentLoaded", function () {
         </form>
 
 {% if results %}
-<div class="accordion">
+
+<div class="results">
 
     {% for row in results %}
     <div class="accordion-item">
-        <button class="accordion-header">
-            🔧 {{ row['Projekt'] if 'Projekt' in row else 'Projekt' }}
-        </button>
+
+        <div class="accordion-header">
+            🔧 Projekt: {{ row["Projekt"] }}
+        </div>
 
         <div class="accordion-content">
-            {% for key, value in row.items() %}
-                <div class="row">
-                    <strong>{{ key }}:</strong>
-                    <span>{{ value }}</span>
-                </div>
-            {% endfor %}
+            <p><strong>Forma:</strong> {{ row["Forma"] }}</p>
+            <p><strong>Część:</strong> {{ row["Część"] }}</p>
+            <p><strong>Robot:</strong> {{ row["Robot"] }}</p>
+            <p><strong>Lokalizacja:</strong> {{ row["Lokalizacja"] }}</p>
         </div>
+
     </div>
     {% endfor %}
 
 </div>
+
 {% endif %}
-
-    </table>
-</div>
-{% endif %}
-
-
