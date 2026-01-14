@@ -1,43 +1,50 @@
-const CACHE_NAME = "lokalizator-robotow-v1";
+const CACHE_NAME = "lap-lokalizator-v3";
 
-const FILES_TO_CACHE = [
-  "/",                     // strona główna
-  "/static/style.css",     // style
-  "/static/technik.png",   // obrazek technika
-  "/static/manifest.json"  // manifest PWA
+const URLS_TO_CACHE = [
+  "/",
+  "/?q=",
+  "/static/style.css",
+  "/static/technik.png",
+  "/static/manifest.json"
 ];
 
-// INSTALL – zapis do cache
+// INSTALL
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(FILES_TO_CACHE);
+      return cache.addAll(URLS_TO_CACHE);
     })
   );
   self.skipWaiting();
 });
 
-// ACTIVATE – czyszczenie starych cache
+// ACTIVATE – czyści stare cache
 self.addEventListener("activate", event => {
   event.waitUntil(
-    caches.keys().then(keys => {
-      return Promise.all(
+    caches.keys().then(keys =>
+      Promise.all(
         keys.map(key => {
           if (key !== CACHE_NAME) {
             return caches.delete(key);
           }
         })
-      );
-    })
+      )
+    )
   );
   self.clients.claim();
 });
 
-// FETCH – offline first
+// FETCH
 self.addEventListener("fetch", event => {
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
-    })
+    fetch(event.request)
+      .then(response => {
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, clone);
+        });
+        return response;
+      })
+      .catch(() => caches.match(event.request))
   );
 });
