@@ -36,25 +36,29 @@
             <button type="submit">Szukaj</button>
         </form>
 
-   {% if results %}
-<div class="results">
-    <table class="results-table">
-        <thead>
-            <tr>
-                {% for key in results[0].keys() %}
-                    <th>{{ key }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in results %}
-                <tr>
-                    {% for value in row.values() %}
-                        <td>{{ value }}</td>
-                    {% endfor %}
-                </tr>
+{% if results %}
+<div class="accordion">
+
+    {% for row in results %}
+    <div class="accordion-item">
+        <button class="accordion-header">
+            🔧 {{ row['Projekt'] if 'Projekt' in row else 'Projekt' }}
+        </button>
+
+        <div class="accordion-content">
+            {% for key, value in row.items() %}
+                <div class="row">
+                    <strong>{{ key }}:</strong>
+                    <span>{{ value }}</span>
+                </div>
             {% endfor %}
-        </tbody>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endif %}
+
     </table>
 </div>
 {% endif %}
