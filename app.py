@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request
+import os
 import pandas as pd
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Wczytanie danych tylko raz (WAŻNE)
-df = pd.read_excel("data/lapy.xlsx")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+EXCEL_PATH = os.path.join(BASE_DIR, "data.xlsx")
+
+df = pd.read_excel(EXCEL_PATH)
 df = df.fillna("")
 
 @app.route("/", methods=["GET"])
@@ -13,22 +16,12 @@ def index():
     results = []
 
     if query:
-        q = query.lower()
-
-        mask = (
-            df["Projekt"].astype(str).str.lower().str.contains(q)
-            | df["Forma"].astype(str).str.lower().str.contains(q)
-            | df["Czesc"].astype(str).str.lower().str.contains(q)
-        )
-
+        mask = df.astype(str).apply(
+            lambda row: row.str.contains(query, case=False, na=False)
+        ).any(axis=1)
         results = df[mask].to_dict(orient="records")
 
-    return render_template(
-        "index.html",
-        results=results,
-        query=query
-    )
+    return render_template("index.html", results=results, query=query)
 
 if __name__ == "__main__":
     app.run(debug=True)
-
