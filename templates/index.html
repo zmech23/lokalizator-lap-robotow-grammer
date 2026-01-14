@@ -69,14 +69,12 @@ document.addEventListener("DOMContentLoaded", function () {
     <div class="accordion-item">
 
         <div class="accordion-header">
-            🔧 Projekt: {{ row["Projekt"] }}
+            🔧 {{ row["PROJEKT"] }}
         </div>
 
         <div class="accordion-content">
-            <p><strong>Forma:</strong> {{ row["Forma"] }}</p>
-            <p><strong>Część:</strong> {{ row["Część"] }}</p>
-            <p><strong>Robot:</strong> {{ row["Robot"] }}</p>
-            <p><strong>Lokalizacja:</strong> {{ row["Lokalizacja"] }}</p>
+            <p><strong>Miejsce:</strong> {{ row["MIEJSCE"] }}</p>
+            <p><strong>Sekcja:</strong> {{ row["SEKCJA"] }}</p>
         </div>
 
     </div>
@@ -85,3 +83,4 @@ document.addEventListener("DOMContentLoaded", function () {
 </div>
 
 {% endif %}
+
