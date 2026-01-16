@@ -5,7 +5,7 @@
     <title>Lokalizator Łap Robotów Grammer</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0b0b0b">
+    <meta name="theme-color" content="#000000">
 
     <link rel="manifest" href="/static/manifest.json">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -13,34 +13,43 @@
 
 <body>
 
-<div class="background"></div>
+<!-- GÓRNY NAGŁÓWEK -->
+<header class="top-bar">
+    LOKALIZATOR ŁAP ROBOTÓW GRAMMER
+</header>
 
-<!-- TECHNIK -->
-<img src="{{ url_for('static', filename='technik.png') }}" class="technician" alt="Technik">
+<!-- KONTENER -->
+<main class="container">
 
-<!-- KARTA -->
-<div class="card">
-    <h1>LOKALIZATOR ŁAP ROBOTÓW<br>GRAMMER</h1>
+    <!-- KARTA -->
+    <div class="card">
 
-    <form method="get">
-        <input type="text" name="q" placeholder="Wpisz numer projektu" value="{{ query or '' }}">
-        <button type="submit">Szukaj</button>
-    </form>
-
-    {% if results %}
-        <div class="results">
-        {% for row in results %}
-            <div class="result">
-                <strong>{{ row["PROJEKT"] }}</strong><br>
-                <span>Miejsce:</span> {{ row["MIEJSCE"] }}<br>
-                <span>Sekcja:</span> {{ row["SEKCJA"] }}
-            </div>
-        {% endfor %}
+        <!-- TECHNIK -->
+        <div class="technician-wrapper">
+            <img src="{{ url_for('static', filename='technician.png') }}" class="technician">
+            <div class="shadow"></div>
         </div>
-    {% elif query %}
-        <p class="no-results">Brak wyników.</p>
-    {% endif %}
-</div>
+
+        <!-- FORMULARZ -->
+        <form method="get">
+            <input type="text" name="q" placeholder="Wpisz numer projektu">
+            <button type="submit">Szukaj</button>
+        </form>
+
+        {% if results %}
+            {% for row in results %}
+                <div class="result">
+                    <strong>{{ row["PROJEKT"] }}</strong><br>
+                    Miejsce: {{ row["MIEJSCE"] }}<br>
+                    Sekcja: {{ row["SEKCJA"] }}
+                </div>
+            {% endfor %}
+        {% elif query %}
+            <p class="no-results">Brak wyników.</p>
+        {% endif %}
+
+    </div>
+</main>
 
 <script>
 if ("serviceWorker" in navigator) {
