@@ -5,32 +5,30 @@
     <title>Lokalizator Łap Robotów Grammer</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#0b0b0b">
 
-    <!-- PWA -->
     <link rel="manifest" href="/static/manifest.json">
-
-    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
+<div class="background"></div>
+
+<!-- TECHNIK -->
+<img src="{{ url_for('static', filename='technik.png') }}" class="technician" alt="Technik">
+
+<!-- KARTA -->
 <div class="card">
     <h1>LOKALIZATOR ŁAP ROBOTÓW<br>GRAMMER</h1>
 
     <form method="get">
-        <input
-            type="text"
-            name="q"
-            placeholder="Wpisz numer projektu"
-            value="{{ query or '' }}"
-            required
-        >
+        <input type="text" name="q" placeholder="Wpisz numer projektu" value="{{ query or '' }}">
         <button type="submit">Szukaj</button>
     </form>
 
     {% if results %}
+        <div class="results">
         {% for row in results %}
             <div class="result">
                 <strong>{{ row["PROJEKT"] }}</strong><br>
@@ -38,6 +36,7 @@
                 <span>Sekcja:</span> {{ row["SEKCJA"] }}
             </div>
         {% endfor %}
+        </div>
     {% elif query %}
         <p class="no-results">Brak wyników.</p>
     {% endif %}
@@ -45,9 +44,7 @@
 
 <script>
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/static/sw.js")
-    .then(() => console.log("SW OK"))
-    .catch(err => console.error("SW ERROR", err));
+    navigator.serviceWorker.register("/static/sw.js");
 }
 </script>
 
