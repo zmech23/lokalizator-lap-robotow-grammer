@@ -3,7 +3,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif; /* Bardziej nowoczesny font */
 }
 
 /* TŁO */
@@ -20,52 +20,54 @@ body {
 .top-title {
     width: 100%;
     text-align: center;
-    padding: 18px 10px;
-    font-size: 20px;
-    letter-spacing: 1px;
+    padding: 25px 10px;
+    font-size: 22px;
+    letter-spacing: 2px;
     font-weight: bold;
+    text-transform: uppercase;
     background: #000;
-    border-bottom: 1px solid #333;
+    border-bottom: 2px solid #333;
+}
+
+/* KONTENER GŁÓWNY - zapewnia centrowanie na środku ekranu */
+.main-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-top: 80px; /* Miejsce dla wystającego technika */
 }
 
 /* KARTA */
 .card {
-    margin-top: 40px;
     background: #fff;
     color: #000;
-    border-radius: 24px;
-    padding: 40px 30px 30px;
-    width: 340px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    border-radius: 28px;
+    padding: 60px 30px 30px; /* Większy górny padding, by formularz nie był pod technikiem */
+    width: 360px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.8);
     text-align: center;
     position: relative;
+    overflow: visible; /* Kluczowe, by technik wystawał */
 }
 
-/* TECHNIK */
+/* TECHNIK - WRAPPER */
 .technician-wrapper {
-    position: relative;
-    margin-top: -120px;
-    margin-bottom: 20px;
-    animation: float 4s ease-in-out infinite;
+    position: absolute;
+    top: -130px; /* Wyciąga technika ponad kartę */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    z-index: 20;
+    pointer-events: none;
 }
 
 .technician {
-    width: 160px;
+    width: 100%;
     display: block;
-    margin: 0 auto;
-    z-index: 2;
-    position: relative;
-}
-
-/* CIEŃ */
-.shadow {
-    width: 120px;
-    height: 20px;
-    background: rgba(0,0,0,0.3);
-    filter: blur(12px);
-    border-radius: 50%;
-    margin: -10px auto 0;
-    animation: shadow 4s ease-in-out infinite;
+    filter: drop-shadow(0 15px 15px rgba(0,0,0,0.5));
+    animation: technicianFloat 3.2s ease-in-out infinite;
 }
 
 /* FORMULARZ */
@@ -73,19 +75,25 @@ body {
     display: flex;
     gap: 10px;
     justify-content: center;
-    margin-top: 20px;
+    margin: 20px 0;
 }
 
 .search-form input {
     flex: 1;
-    padding: 12px;
+    padding: 12px 15px;
     font-size: 15px;
     border-radius: 12px;
-    border: 2px solid #ddd;
+    border: 2px solid #eee;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.search-form input:focus {
+    border-color: #ffcc00;
 }
 
 .search-form button {
-    padding: 12px 18px;
+    padding: 12px 20px;
     font-size: 15px;
     border-radius: 12px;
     border: none;
@@ -93,83 +101,33 @@ body {
     color: #000;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 6px 15px rgba(255,170,0,0.5);
+    box-shadow: 0 4px 12px rgba(255,170,0,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .search-form button:hover {
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255,170,0,0.6);
 }
 
 /* WYNIKI */
 .result {
-    background: #111;
+    background: #1a1a1a;
     color: #fff;
-    padding: 14px;
-    border-radius: 12px;
-    margin-top: 12px;
+    padding: 16px;
+    border-radius: 15px;
+    margin-top: 15px;
     text-align: left;
+    border-left: 4px solid #ffcc00;
 }
 
 .result strong {
     color: #ffcc00;
+    font-size: 1.1em;
 }
 
-/* BRAK WYNIKÓW */
-.no-results {
-    margin-top: 15px;
-    color: #666;
-}
-
-/* ANIMACJE */
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
-}
-
-@keyframes shadow {
-    0%, 100% { transform: scale(1); opacity: 0.35; }
-    50% { transform: scale(0.85); opacity: 0.2; }
-}
-/* CENTROWANIE KARTY */
-.main-container {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-/* === TECHNIK === */
-
-.card {
-    position: relative;
-    overflow: visible;
-}
-
-.technician-wrapper {
-    position: absolute;
-    top: -140px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 180px;
-    pointer-events: none;
-    z-index: 20;
-}
-
-.technician {
-    width: 100%;
-    animation: technicianFloat 3.2s ease-in-out infinite;
-    filter: drop-shadow(0 30px 22px rgba(0,0,0,0.45));
-}
-
-/* Animacja lewitacji */
+/* ANIMACJA LEWITACJI */
 @keyframes technicianFloat {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-14px);
-    }
-    100% {
-        transform: translateY(0);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
 }
