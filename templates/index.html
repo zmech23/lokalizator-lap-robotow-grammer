@@ -37,6 +37,13 @@
 </div>
 
 </body>
+{% if results %}
+  {% for r in results %}
+    <div class="result">
+      {{ r }}
+    </div>
+  {% endfor %}
+{% endif %}
 
         {% endfor %}
     {% elif query %}
