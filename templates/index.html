@@ -16,26 +16,27 @@
 
 <body>
 
+<div class="card">
     <h1>LOKALIZATOR ŁAP ROBOTÓW GRAMMER</h1>
 
     <form method="get">
-        <input
-            type="text"
-            name="q"
-            placeholder="Wpisz numer projektu"
-            value="{{ query }}"
-        >
+        <input type="text" name="q" placeholder="Wpisz numer projektu">
         <button type="submit">Szukaj</button>
     </form>
 
     {% if results %}
-        {% for row in results %}
-            <div class="result">
-                <strong>{{ row["PROJEKT"] }}</strong><br>
-                Miejsce: {{ row["MIEJSCE"] }}<br>
-                Sekcja: {{ row["SEKCJA"] }}
-            </div>
-            <hr>
+      {% for row in results %}
+        <div class="result">
+          <strong>{{ row["PROJEKT"] }}</strong><br>
+          Miejsce: {{ row["MIEJSCE"] }}<br>
+          Sekcja: {{ row["SEKCJA"] }}
+        </div>
+      {% endfor %}
+    {% endif %}
+</div>
+
+</body>
+
         {% endfor %}
     {% elif query %}
         <p>Brak wyników.</p>
