@@ -1,31 +1,14 @@
-from flask import Flask, render_template, request, send_from_directory
-import pandas as pd
+from flask import Flask, render_template
 
 app = Flask(
     __name__,
-    static_folder="statyczny",
-    template_folder="szablony"
+    template_folder="templates",
+    static_folder="static"
 )
 
 @app.route("/")
 def index():
-    query = request.args.get("q", "")
-    results = []
-
-    if query:
-        df = pd.read_excel("dane.xlsx")
-        mask = df.apply(
-            lambda row: row.astype(str).str.contains(query, case=False).any(),
-            axis=1
-        )
-        results = df[mask].to_dict(orient="records")
-
-    return render_template("index.html", results=results)
-
-# 🔥 PWA – Service Worker z ROOT
-@app.route("/sw.js")
-def service_worker():
-    return send_from_directory(".", "sw.js", mimetype="application/javascript")
+    return render_template("index.html")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
