@@ -7,25 +7,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#000000">
 
- <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-<meta name="theme-color" content="#000000">
-<h1>LOKALIZATOR ŁAP ROBOTÓW GRAMMER</h1>
+    <!-- PWA -->
+    <link rel="manifest" href="/static/manifest.json">
 
-<form method="get">
-    <input type="text" name="q" placeholder="Wpisz numer projektu">
-    <button type="submit">Szukaj</button>
-</form>
+    <!-- Styl -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
 
-{% if results %}
-  {% for row in results %}
-    <div>
-      <strong>{{ row["PROJEKT"] }}</strong><br>
-      Miejsce: {{ row["MIEJSCE"] }}<br>
-      Sekcja: {{ row["SEKCJA"] }}
-    </div>
-    <hr>
-  {% endfor %}
-{% endif %}
+<body>
+
+    <h1>LOKALIZATOR ŁAP ROBOTÓW GRAMMER</h1>
+
+    <form method="get">
+        <input
+            type="text"
+            name="q"
+            placeholder="Wpisz numer projektu"
+            value="{{ query }}"
+        >
+        <button type="submit">Szukaj</button>
+    </form>
+
+    {% if results %}
+        {% for row in results %}
+            <div class="result">
+                <strong>{{ row["PROJEKT"] }}</strong><br>
+                Miejsce: {{ row["MIEJSCE"] }}<br>
+                Sekcja: {{ row["SEKCJA"] }}
+            </div>
+            <hr>
+        {% endfor %}
+    {% elif query %}
+        <p>Brak wyników.</p>
+    {% endif %}
+
+    <!-- Service Worker -->
+    <script>
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/static/sw.js");
+    }
+    </script>
 
 </body>
 </html>
+
