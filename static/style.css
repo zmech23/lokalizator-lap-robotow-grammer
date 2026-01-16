@@ -138,3 +138,38 @@ body {
     justify-content: center;
     width: 100%;
 }
+/* === TECHNIK === */
+
+.card {
+    position: relative;
+    overflow: visible;
+}
+
+.technician-wrapper {
+    position: absolute;
+    top: -140px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.technician {
+    width: 100%;
+    animation: technicianFloat 3.2s ease-in-out infinite;
+    filter: drop-shadow(0 30px 22px rgba(0,0,0,0.45));
+}
+
+/* Animacja lewitacji */
+@keyframes technicianFloat {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-14px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
