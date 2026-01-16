@@ -77,12 +77,6 @@ body {
     padding: 45px 30px 30px; /* Zmniejszyłem górny padding z 60px na 45px, bo technik jest mniejszy */
 }
 
-.technician {
-    width: 100%;
-    display: block;
-    filter: drop-shadow(0 15px 15px rgba(0,0,0,0.5));
-    animation: technicianFloat 3.2s ease-in-out infinite;
-}
 
 /* FORMULARZ */
 .search-form {
