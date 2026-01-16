@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#000000">
 
     <!-- PWA -->
-    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <link rel="manifest" href="/static/manifest.json">
 
     <!-- Styl -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -17,15 +17,10 @@
 <body>
 
 <div class="card">
-    <h1>LOKALIZATOR ŁAP ROBOTÓW GRAMMER</h1>
+    <h1>LOKALIZATOR ŁAP ROBOTÓW<br>GRAMMER</h1>
 
     <form method="get">
-        <input
-            type="text"
-            name="q"
-            placeholder="Wpisz numer projektu"
-            value="{{ query if query else '' }}"
-        >
+        <input type="text" name="q" placeholder="Wpisz numer projektu" value="{{ query or '' }}">
         <button type="submit">Szukaj</button>
     </form>
 
