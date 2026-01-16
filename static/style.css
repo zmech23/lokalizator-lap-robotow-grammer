@@ -40,7 +40,7 @@ body {
 }
 
 /* KARTA */
-.card {
+.card { position: relative; }
     background: #fff;
     color: #000;
     border-radius: 28px;
