@@ -6,20 +6,35 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* TŁO */
+/* TŁO STRONY – RYSUNEK + CIEMNA MGŁA */
 body {
     min-height: 100vh;
-    background: linear-gradient(135deg, #0f0f0f, #2b2b2b);
-    color: #ffffff;
+    background:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        url("/static/technik.png");   /* ← TU JEST RYSUNEK */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     padding: 20px;
+}
+
+/* BIAŁA RAMKA (KARTA APLIKACJI) */
+.card {
+    max-width: 600px;
+    margin: 80px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
 }
 
 /* NAGŁÓWEK */
 h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     font-size: 26px;
     letter-spacing: 1px;
+    color: #000;
 }
 
 /* FORMULARZ */
@@ -27,25 +42,26 @@ form {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 input[type="text"] {
-    padding: 10px;
+    padding: 12px;
     width: 260px;
     font-size: 16px;
-    border-radius: 6px;
-    border: none;
+    border-radius: 8px;
+    border: 1px solid #ccc;
 }
 
 button {
-    padding: 10px 18px;
+    padding: 12px 20px;
     font-size: 16px;
-    border-radius: 6px;
+    border-radius: 8px;
     border: none;
     background-color: #ffcc00;
     color: #000;
     cursor: pointer;
+    font-weight: bold;
 }
 
 button:hover {
@@ -54,17 +70,18 @@ button:hover {
 
 /* WYNIKI */
 .result {
-    background: #1e1e1e;
-    padding: 12px;
-    border-radius: 8px;
+    background: #f5f5f5;
+    padding: 14px;
+    border-radius: 10px;
     margin-bottom: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     font-size: 15px;
+    color: #000;
 }
 
 .result strong {
     font-size: 16px;
-    color: #ffcc00;
+    color: #000;
 }
 
 /* LINIA */
