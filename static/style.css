@@ -53,14 +53,28 @@ body {
 }
 
 /* TECHNIK - WRAPPER */
+/* Zmniejszony wrapper */
 .technician-wrapper {
     position: absolute;
-    top: -130px; /* Wyciąga technika ponad kartę */
+    top: -80px;         /* Zmniejszamy, bo mniejszy obrazek nie musi tak wysoko wystawać */
     left: 50%;
     transform: translateX(-50%);
-    width: 180px;
+    width: 90px;        /* Zmniejszone z 180px na 90px (czyli o połowę) */
     z-index: 20;
     pointer-events: none;
+}
+
+.technician {
+    width: 100%;
+    display: block;
+    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.4)); /* Lżejszy cień dla mniejszego obiektu */
+    animation: technicianFloat 3.2s ease-in-out infinite;
+}
+
+/* KARTA - dopasowanie paddingu */
+.card {
+    /* ... reszta twoich ustawień ... */
+    padding: 45px 30px 30px; /* Zmniejszyłem górny padding z 60px na 45px, bo technik jest mniejszy */
 }
 
 .technician {
