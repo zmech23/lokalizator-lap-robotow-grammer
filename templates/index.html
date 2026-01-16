@@ -10,7 +10,7 @@
     <!-- PWA -->
     <link rel="manifest" href="/static/manifest.json">
 
-    <!-- Styl -->
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
@@ -20,7 +20,13 @@
     <h1>LOKALIZATOR ŁAP ROBOTÓW<br>GRAMMER</h1>
 
     <form method="get">
-        <input type="text" name="q" placeholder="Wpisz numer projektu" value="{{ query or '' }}">
+        <input
+            type="text"
+            name="q"
+            placeholder="Wpisz numer projektu"
+            value="{{ query or '' }}"
+            required
+        >
         <button type="submit">Szukaj</button>
     </form>
 
@@ -28,12 +34,12 @@
         {% for row in results %}
             <div class="result">
                 <strong>{{ row["PROJEKT"] }}</strong><br>
-                Miejsce: {{ row["MIEJSCE"] }}<br>
-                Sekcja: {{ row["SEKCJA"] }}
+                <span>Miejsce:</span> {{ row["MIEJSCE"] }}<br>
+                <span>Sekcja:</span> {{ row["SEKCJA"] }}
             </div>
         {% endfor %}
     {% elif query %}
-        <p>Brak wyników.</p>
+        <p class="no-results">Brak wyników.</p>
     {% endif %}
 </div>
 
