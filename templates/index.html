@@ -43,6 +43,13 @@
     {% endif %}
 </div>
 
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/static/sw.js")
+    .then(() => console.log("SW OK"))
+    .catch(err => console.error("SW ERROR", err));
+}
+</script>
 
 
 </body>
