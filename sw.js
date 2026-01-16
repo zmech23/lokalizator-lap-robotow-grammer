@@ -1,20 +1,23 @@
-const CACHE_NAME = "lokalizator-pwa-v1";
+const CACHE_NAME = "lokalizator-v1";
 
-self.addEventListener("install", event => {
-  self.skipWaiting();
+const FILES_TO_CACHE = [
+  "/",
+  "/static/style.css",
+  "/static/technik.png"
+];
+
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(FILES_TO_CACHE);
+    })
+  );
 });
 
-self.addEventListener("activate", event => {
-  event.waitUntil(self.clients.claim());
-});
-
-self.addEventListener("fetch", event => {
+self.addEventListener("fetch", (event) => {
   event.respondWith(
-    fetch(event.request).catch(() => {
-      return new Response(
-        "<h1>Offline</h1><p>Brak połączenia z internetem</p>",
-        { headers: { "Content-Type": "text/html; charset=utf-8" } }
-      );
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
     })
   );
 });
