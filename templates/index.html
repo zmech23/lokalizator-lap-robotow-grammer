@@ -8,11 +8,10 @@
     <meta name="theme-color" content="#000000">
 
     <!-- PWA -->
-    <link rel="manifest" href="/static/manifest.json">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
 
     <!-- Styl -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
@@ -21,42 +20,34 @@
     <h1>LOKALIZATOR ŁAP ROBOTÓW GRAMMER</h1>
 
     <form method="get">
-        <input type="text" name="q" placeholder="Wpisz numer projektu">
+        <input
+            type="text"
+            name="q"
+            placeholder="Wpisz numer projektu"
+            value="{{ query if query else '' }}"
+        >
         <button type="submit">Szukaj</button>
     </form>
 
     {% if results %}
-      {% for row in results %}
-        <div class="result">
-          <strong>{{ row["PROJEKT"] }}</strong><br>
-          Miejsce: {{ row["MIEJSCE"] }}<br>
-          Sekcja: {{ row["SEKCJA"] }}
-        </div>
-      {% endfor %}
-    {% endif %}
-</div>
-
-</body>
-{% if results %}
-  {% for r in results %}
-    <div class="result">
-      {{ r }}
-    </div>
-  {% endfor %}
-{% endif %}
-
+        {% for row in results %}
+            <div class="result">
+                <strong>{{ row["PROJEKT"] }}</strong><br>
+                Miejsce: {{ row["MIEJSCE"] }}<br>
+                Sekcja: {{ row["SEKCJA"] }}
+            </div>
         {% endfor %}
     {% elif query %}
         <p>Brak wyników.</p>
     {% endif %}
+</div>
 
-    <!-- Service Worker -->
-    <script>
-    if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("/static/sw.js");
-    }
-    </script>
+<!-- Service Worker -->
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/static/sw.js");
+}
+</script>
 
 </body>
 </html>
-
