@@ -5,25 +5,29 @@
     <title>Lokalizator Łap Robotów Grammer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
-<header>
-    <h1>LOKALIZATOR ŁAP ROBOTÓW GRAMMER</h1>
-</header>
+<div class="app-title">
+    LOKALIZATOR ŁAP ROBOTÓW GRAMMER
+</div>
 
-<main class="page">
+<div class="page">
     <div class="card">
 
-        <div class="technician-wrapper">
+        <div class="technician">
             <img src="{{ url_for('static', filename='technik.png') }}" alt="Technik">
         </div>
 
-        <p class="hint">Wpisz numer projektu, aby znaleźć łapę robota</p>
+        <p class="hint">
+            Wpisz numer projektu, aby znaleźć łapę robota
+        </p>
 
-        <form method="GET"> class="search-form">
-            <input 
-                type="text" 
-                name="project_number" 
+        <!-- MUSI BYĆ GET -->
+        <form method="GET" class="search-form">
+            <input
+                type="text"
+                name="q"
                 placeholder="Wpisz numer projektu"
                 required
             >
@@ -31,7 +35,7 @@
         </form>
 
     </div>
-</main>
+</div>
 
 </body>
 </html>
