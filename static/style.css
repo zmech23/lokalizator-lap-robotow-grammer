@@ -1,113 +1,107 @@
+/* RESET */
 * {
     box-sizing: border-box;
-    font-family: "Segoe UI", sans-serif;
-}
-
-body {
     margin: 0;
-    height: 100vh;
-    background: radial-gradient(circle at top, #1a2a3a, #05080c);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
+    padding: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
-.background {
+/* TŁO STRONY */
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #1a1a1a, #000000);
+    color: #000;
+}
+
+/* WYŚRODKOWANIE */
+.page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* KARTA */
+.card {
+    background: #ffffff;
     width: 100%;
+    max-width: 460px;
+    padding: 36px 32px 40px;
+    border-radius: 18px;
     text-align: center;
 }
 
-.title {
-    letter-spacing: 2px;
-    margin-bottom: 40px;
-    opacity: 0.9;
-}
-
-.card {
-    background: rgba(15, 25, 35, 0.9);
-    border-radius: 18px;
-    padding: 30px 40px;
-    width: 90%;
-    max-width: 600px;
-    margin: auto;
+/* POŚWIATA */
+.glow {
     box-shadow:
-        0 0 40px rgba(0, 255, 255, 0.15),
-        inset 0 0 30px rgba(0, 255, 255, 0.05);
-    animation: fadeIn 0.8s ease;
+        0 0 0 2px rgba(255,255,255,0.6),
+        0 0 30px rgba(255,255,255,0.35),
+        0 20px 50px rgba(0,0,0,0.6);
 }
 
-.icon {
-    font-size: 48px;
-    margin-bottom: 15px;
-    opacity: 0.85;
+/* TYTUŁ */
+.title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 28px;
+    color: #111;
 }
 
-form {
+/* FORMULARZ */
+.search-form {
     display: flex;
-    gap: 12px;
-    margin-bottom: 25px;
+    gap: 10px;
+    margin-bottom: 24px;
 }
 
-input {
+.search-form input {
     flex: 1;
-    padding: 14px;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-    font-size: 16px;
+    padding: 12px 14px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
 }
 
-button {
-    padding: 14px 22px;
-    border-radius: 10px;
+.search-form button {
+    padding: 12px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 8px;
     border: none;
-    font-weight: bold;
     cursor: pointer;
     background: linear-gradient(135deg, #ffcc00, #ff9900);
     color: #000;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-button:hover {
+.search-form button:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 15px rgba(255, 180, 0, 0.4);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.25);
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+/* WYNIKI */
+.results {
     margin-top: 10px;
-    animation: fadeIn 0.5s ease;
 }
 
-th {
-    background: rgba(255, 255, 255, 0.08);
-    padding: 10px;
+.result {
+    background: #f5f5f5;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: left;
 }
 
-td {
-    padding: 10px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+.proj {
+    font-weight: 700;
+    margin-bottom: 4px;
 }
 
-tr:hover {
-    background: rgba(0,255,255,0.05);
-}
-
+/* BRAK WYNIKÓW */
 .no-results {
-    margin-top: 20px;
-    color: #ff6666;
-    font-weight: bold;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
 }
