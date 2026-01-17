@@ -1,98 +1,113 @@
 * {
     box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: "Segoe UI", sans-serif;
 }
 
 body {
     margin: 0;
     height: 100vh;
-    background:
-        radial-gradient(circle at top, #0a1a2a, #020812 70%),
-        url("/static/tech-bg.png");
-    background-size: cover;
-    background-position: center;
-    color: #fff;
-}
-
-.overlay {
-    height: 100vh;
+    background: radial-gradient(circle at top, #1a2a3a, #05080c);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: white;
+}
+
+.background {
+    width: 100%;
+    text-align: center;
 }
 
 .title {
-    font-size: 28px;
     letter-spacing: 2px;
     margin-bottom: 40px;
-    color: #e6f6ff;
-    text-shadow: 0 0 15px rgba(0,180,255,0.6);
+    opacity: 0.9;
 }
 
-.glass-card {
-    width: 560px;
-    padding: 40px;
-    border-radius: 22px;
-    background: rgba(10, 25, 40, 0.75);
-    border: 1px solid rgba(0, 180, 255, 0.4);
+.card {
+    background: rgba(15, 25, 35, 0.9);
+    border-radius: 18px;
+    padding: 30px 40px;
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
     box-shadow:
-        0 0 40px rgba(0,180,255,0.25),
-        inset 0 0 25px rgba(0,180,255,0.15);
-    backdrop-filter: blur(8px);
+        0 0 40px rgba(0, 255, 255, 0.15),
+        inset 0 0 30px rgba(0, 255, 255, 0.05);
+    animation: fadeIn 0.8s ease;
+}
+
+.icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    opacity: 0.85;
 }
 
 form {
     display: flex;
-    gap: 15px;
+    gap: 12px;
     margin-bottom: 25px;
 }
 
 input {
     flex: 1;
-    padding: 14px 16px;
+    padding: 14px;
     border-radius: 10px;
     border: none;
-    font-size: 16px;
     outline: none;
+    font-size: 16px;
 }
 
 button {
-    background: linear-gradient(135deg, #ffd24a, #ffb300);
-    border: none;
+    padding: 14px 22px;
     border-radius: 10px;
-    padding: 14px 26px;
-    font-size: 16px;
+    border: none;
     font-weight: bold;
     cursor: pointer;
+    background: linear-gradient(135deg, #ffcc00, #ff9900);
+    color: #000;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 button:hover {
-    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(255, 180, 0, 0.4);
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
-}
-
-th, td {
-    padding: 10px;
-    text-align: center;
+    animation: fadeIn 0.5s ease;
 }
 
 th {
-    color: #9ddcff;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 10px;
 }
 
-tr:not(:last-child) td {
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-.error {
+tr:hover {
+    background: rgba(0,255,255,0.05);
+}
+
+.no-results {
     margin-top: 20px;
-    color: #ff6b6b;
-    text-align: center;
+    color: #ff6666;
+    font-weight: bold;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
