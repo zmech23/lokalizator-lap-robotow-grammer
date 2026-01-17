@@ -24,23 +24,21 @@
         </p>
 
         <!-- MUSI BYĆ GET -->
-        <form method="GET" class="search-form">
-            <input
-                type="text"
-                name="q"
-                placeholder="Wpisz numer projektu"
-                required
+       <form method="get">
+    <input type="text" name="q" placeholder="Wpisz numer projektu" required>
+    <button type="submit">Szukaj</button>
+</form>
             >
             <button type="submit">Szukaj</button>
         </form>
 {% if result %}
-    <p style="margin-top:20px; color:green; font-weight:bold;">
+    <div style="margin-top:20px; color:#0a7f3f; font-weight:bold;">
         ✅ Lokalizacja: {{ result }}
-    </p>
+    </div>
 {% elif error %}
-    <p style="margin-top:20px; color:red;">
+    <div style="margin-top:20px; color:#b00020;">
         {{ error }}
-    </p>
+    </div>
 {% endif %}
 
     </div>
