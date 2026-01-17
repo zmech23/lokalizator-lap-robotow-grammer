@@ -1,141 +1,112 @@
-/* RESET */
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Arial, sans-serif; /* Bardziej nowoczesny font */
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* TŁO */
 body {
+    margin: 0;
     min-height: 100vh;
     background: radial-gradient(circle at top, #222, #000);
     color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-/* NAGŁÓWEK */
-.top-title {
+/* ===== HEADER ===== */
+header {
     width: 100%;
+    padding: 18px 0;
     text-align: center;
-    padding: 25px 10px;
-    font-size: 22px;
+    background: linear-gradient(to bottom, #000, #111);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 18px;
     letter-spacing: 2px;
-    font-weight: bold;
-    text-transform: uppercase;
-    background: #000;
-    border-bottom: 2px solid #333;
 }
 
-/* KONTENER GŁÓWNY - zapewnia centrowanie na środku ekranu */
-.main-container {
-    flex: 1;
+/* ===== PAGE ===== */
+.page {
     display: flex;
-    align-items: center;
     justify-content: center;
-    width: 100%;
-    padding-top: 80px; /* Miejsce dla wystającego technika */
+    align-items: center;
+    min-height: calc(100vh - 70px);
 }
 
-/* KARTA */
-.card { position: relative; }
-    background: #fff;
-    color: #000;
-    border-radius: 28px;
-    padding: 60px 30px 30px; /* Większy górny padding, by formularz nie był pod technikiem */
-    width: 360px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.8);
-    text-align: center;
+/* ===== CARD ===== */
+.card {
     position: relative;
-    overflow: visible; /* Kluczowe, by technik wystawał */
+    background: linear-gradient(145deg, #ffffff, #f2f2f2);
+    border-radius: 22px;
+    padding: 100px 40px 40px;
+    width: 380px;
+    text-align: center;
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.7);
 }
 
-/* TECHNIK - WRAPPER */
-/* Zmniejszony wrapper */
+/* glow */
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 22px;
+    box-shadow: 0 0 80px rgba(255,200,0,0.15);
+    z-index: -1;
+}
+
+/* ===== TECHNIK ===== */
 .technician-wrapper {
     position: absolute;
-    top: -80px;         /* Zmniejszamy, bo mniejszy obrazek nie musi tak wysoko wystawać */
+    top: -70px;
     left: 50%;
     transform: translateX(-50%);
-    width: 90px;        /* Zmniejszone z 180px na 90px (czyli o połowę) */
-    z-index: 20;
-    pointer-events: none;
+    width: 140px;
 }
 
-.technician {
+.technician-wrapper img {
     width: 100%;
     display: block;
-    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.4)); /* Lżejszy cień dla mniejszego obiektu */
-    animation: technicianFloat 3.2s ease-in-out infinite;
+    filter: drop-shadow(0 18px 18px rgba(0,0,0,0.45));
 }
 
-/* KARTA - dopasowanie paddingu */
-.card {
-    /* ... reszta twoich ustawień ... */
-    padding: 45px 30px 30px; /* Zmniejszyłem górny padding z 60px na 45px, bo technik jest mniejszy */
+/* ===== TEXT ===== */
+.hint {
+    color: #444;
+    font-size: 14px;
+    margin-bottom: 25px;
 }
 
-
-/* FORMULARZ */
+/* ===== FORM ===== */
 .search-form {
     display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin: 20px 0;
+    gap: 12px;
 }
 
 .search-form input {
     flex: 1;
-    padding: 12px 15px;
-    font-size: 15px;
+    padding: 14px;
     border-radius: 12px;
-    border: 2px solid #eee;
-    outline: none;
-    transition: border-color 0.3s;
+    border: 1px solid #ccc;
+    font-size: 15px;
 }
 
 .search-form input:focus {
-    border-color: #ffcc00;
+    outline: none;
+    border-color: #ffb300;
+    box-shadow: 0 0 0 2px rgba(255,179,0,0.2);
 }
 
 .search-form button {
-    padding: 12px 20px;
-    font-size: 15px;
+    padding: 14px 22px;
     border-radius: 12px;
     border: none;
-    background: linear-gradient(135deg, #ffcc00, #ff9900);
-    color: #000;
+    background: linear-gradient(145deg, #ffcc00, #ffb300);
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(255,170,0,0.4);
-    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .search-form button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(255,170,0,0.6);
-}
-
-/* WYNIKI */
-.result {
-    background: #1a1a1a;
-    color: #fff;
-    padding: 16px;
-    border-radius: 15px;
-    margin-top: 15px;
-    text-align: left;
-    border-left: 4px solid #ffcc00;
-}
-
-.result strong {
-    color: #ffcc00;
-    font-size: 1.1em;
-}
-
-/* ANIMACJA LEWITACJI */
-@keyframes technicianFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+    filter: brightness(1.05);
 }
