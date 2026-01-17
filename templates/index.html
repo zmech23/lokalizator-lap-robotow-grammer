@@ -1,47 +1,41 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Lokalizator Łap Robotów Grammer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
 <body>
+    <div class="overlay">
+        <h1 class="title">LOKALIZATOR ŁAP ROBOTÓW</h1>
 
-<div class="container">
+        <div class="glass-card">
+            <form method="get">
+                <input
+                    type="text"
+                    name="q"
+                    placeholder="Wpisz numer projektu"
+                    value="{{ query or '' }}"
+                    autocomplete="off"
+                >
+                <button type="submit">Szukaj</button>
+            </form>
 
-    <h1>Lokalizator Łap Robotów Grammer</h1>
-
-    <div class="card">
-        <img src="{{ url_for('static', filename='technik.png') }}" class="technik">
-
-        <form method="get">
-            <input type="text" name="q" placeholder="Wpisz numer projektu" value="{{ query }}">
-            <button type="submit">Szukaj</button>
-        </form>
-
-        {% if query %}
-            {% if wyniki %}
-                <table>
+            {% if results %}
+            <table>
+                <thead>
                     <tr>
                         <th>Projekt</th>
                         <th>Miejsce</th>
                         <th>Sekcja</th>
                     </tr>
-                    {% for w in wyniki %}
+                </thead>
+                <tbody>
+                    {% for r in results %}
                     <tr>
-                        <td>{{ w.PROJEKT }}</td>
-                        <td>{{ w.MIEJSCE }}</td>
-                        <td>{{ w.SEKCJA }}</td>
+                        <td>{{ r.projekt }}</td>
+                        <td>{{ r.miejsce }}</td>
+                        <td>{{ r.sekcja }}</td>
                     </tr>
                     {% endfor %}
-                </table>
-            {% else %}
-                <p class="error">❌ Brak wyników</p>
+                </tbody>
+            </table>
+            {% elif query %}
+                <p class="error">❌ Nie znaleziono projektu</p>
             {% endif %}
-        {% endif %}
+        </div>
     </div>
-
-</div>
-
 </body>
-</html>
