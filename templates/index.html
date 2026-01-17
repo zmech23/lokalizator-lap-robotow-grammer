@@ -5,43 +5,42 @@
     <title>Lokalizator Łap Robotów Grammer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
 
-<div class="app-title">
-    LOKALIZATOR ŁAP ROBOTÓW GRAMMER
-</div>
+<div class="container">
 
-<div class="page">
+    <h1>Lokalizator Łap Robotów Grammer</h1>
+
     <div class="card">
+        <img src="{{ url_for('static', filename='technik.png') }}" class="technik">
 
-        <div class="technician">
-            <img src="{{ url_for('static', filename='technik.png') }}" alt="Technik">
-        </div>
-
-        <p class="hint">
-            Wpisz numer projektu, aby znaleźć łapę robota
-        </p>
-
-        <!-- MUSI BYĆ GET -->
-       <form method="get">
-    <input type="text" name="q" placeholder="Wpisz numer projektu" required>
-    <button type="submit">Szukaj</button>
-</form>
-            >
+        <form method="get">
+            <input type="text" name="q" placeholder="Wpisz numer projektu" value="{{ query }}">
             <button type="submit">Szukaj</button>
         </form>
-{% if result %}
-    <div style="margin-top:20px; color:#0a7f3f; font-weight:bold;">
-        ✅ Lokalizacja: {{ result }}
-    </div>
-{% elif error %}
-    <div style="margin-top:20px; color:#b00020;">
-        {{ error }}
-    </div>
-{% endif %}
 
+        {% if query %}
+            {% if wyniki %}
+                <table>
+                    <tr>
+                        <th>Projekt</th>
+                        <th>Miejsce</th>
+                        <th>Sekcja</th>
+                    </tr>
+                    {% for w in wyniki %}
+                    <tr>
+                        <td>{{ w.PROJEKT }}</td>
+                        <td>{{ w.MIEJSCE }}</td>
+                        <td>{{ w.SEKCJA }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p class="error">❌ Brak wyników</p>
+            {% endif %}
+        {% endif %}
     </div>
+
 </div>
 
 </body>
