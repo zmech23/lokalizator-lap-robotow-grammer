@@ -5,39 +5,18 @@ app = Flask(__name__)
 
 # Wczytaj Excel
 df = pd.read_excel("data.xlsx", dtype=str)
+df.columns = ["PROJEKT", "MIEJSCE", "SEKCJA"]
 df = df.fillna("")
-
-# Normalizacja danych
-df = df.applymap(lambda x: x.strip().upper())
-
 
 @app.route("/", methods=["GET"])
 def index():
     query = request.args.get("q", "").strip().upper()
-    result = None
-    error = None
+    wyniki = []
 
     if query:
-        # Zakładamy:
-        # kolumna 0 = numer projektu
-        # kolumna 1 = lokalizacja
-        project_col = df.columns[0]
-        location_col = df.columns[1]
+        wyniki = df[df["PROJEKT"].str.upper().str.contains(query)].to_dict(orient="records")
 
-        match = df[df[project_col].str.contains(query, na=False)]
-
-        if not match.empty:
-            result = match.iloc[0][location_col]
-        else:
-            error = f"❌ Nie znaleziono projektu: {query}"
-
-    return render_template(
-        "index.html",
-        result=result,
-        error=error,
-        query=query
-    )
-
+    return render_template("index.html", query=query, wyniki=wyniki)
 
 if __name__ == "__main__":
     app.run(debug=True)
