@@ -1,11 +1,20 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: radial-gradient(circle at center, #444, #000);
-    color: white;
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-.container {
+body {
+    margin: 0;
+    height: 100vh;
+    background:
+        radial-gradient(circle at top, #0a1a2a, #020812 70%),
+        url("/static/tech-bg.png");
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+
+.overlay {
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -13,82 +22,77 @@ body {
     justify-content: center;
 }
 
-h1 {
-    margin-bottom: 40px;
+.title {
+    font-size: 28px;
     letter-spacing: 2px;
+    margin-bottom: 40px;
+    color: #e6f6ff;
+    text-shadow: 0 0 15px rgba(0,180,255,0.6);
 }
 
-.card {
-    background: white;
-    color: black;
-    width: 520px;
-    padding: 90px 30px 30px;
-    border-radius: 20px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-    text-align: center;
-    position: relative;
-}
-
-.technik {
-    width: 130px;
-    position: absolute;
-    top: -75px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-    0% { transform: translate(-50%, 0); }
-    50% { transform: translate(-50%, -12px); }
-    100% { transform: translate(-50%, 0); }
+.glass-card {
+    width: 560px;
+    padding: 40px;
+    border-radius: 22px;
+    background: rgba(10, 25, 40, 0.75);
+    border: 1px solid rgba(0, 180, 255, 0.4);
+    box-shadow:
+        0 0 40px rgba(0,180,255,0.25),
+        inset 0 0 25px rgba(0,180,255,0.15);
+    backdrop-filter: blur(8px);
 }
 
 form {
     display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 20px;
+    gap: 15px;
+    margin-bottom: 25px;
 }
 
 input {
-    padding: 10px;
+    flex: 1;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: none;
     font-size: 16px;
-    width: 60%;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+    outline: none;
 }
 
 button {
-    background: #FFC107;
+    background: linear-gradient(135deg, #ffd24a, #ffb300);
     border: none;
-    padding: 10px 18px;
-    border-radius: 8px;
+    border-radius: 10px;
+    padding: 14px 26px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
 }
 
 button:hover {
-    background: #e0a800;
+    filter: brightness(1.1);
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 th, td {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
+    padding: 10px;
     text-align: center;
 }
 
 th {
-    background: #f3f3f3;
+    color: #9ddcff;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+tr:not(:last-child) td {
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .error {
-    color: red;
-    font-weight: bold;
+    margin-top: 20px;
+    color: #ff6b6b;
+    text-align: center;
 }
