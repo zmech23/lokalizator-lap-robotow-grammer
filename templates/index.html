@@ -33,6 +33,15 @@
             >
             <button type="submit">Szukaj</button>
         </form>
+{% if result %}
+    <p style="margin-top:20px; color:green; font-weight:bold;">
+        ✅ Lokalizacja: {{ result }}
+    </p>
+{% elif error %}
+    <p style="margin-top:20px; color:red;">
+        {{ error }}
+    </p>
+{% endif %}
 
     </div>
 </div>
