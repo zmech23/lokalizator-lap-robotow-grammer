@@ -3,58 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Lokalizator Łap Robotów Grammer</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#000000">
-
-    <link rel="manifest" href="/static/manifest.json">
-
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
 
-<header class="top-title">
-    LOKALIZATOR ŁAP ROBOTÓW GRAMMER
+<header>
+    <h1>LOKALIZATOR ŁAP ROBOTÓW GRAMMER</h1>
 </header>
 
-<main class="main-container">
+<main class="page">
     <div class="card">
 
         <div class="technician-wrapper">
-            <img src="{{ url_for('static', filename='technik.png') }}" 
-                 alt="Technik" 
-                 class="technician">
-            <div class="shadow"></div>
+            <img src="{{ url_for('static', filename='technik.png') }}" alt="Technik">
         </div>
 
-        <form method="get" class="search-form">
-            <input type="text" name="q" placeholder="Wpisz numer projektu" value="{{ query if query else '' }}">
+        <p class="hint">Wpisz numer projektu, aby znaleźć łapę robota</p>
+
+        <form method="POST" class="search-form">
+            <input 
+                type="text" 
+                name="project_number" 
+                placeholder="Wpisz numer projektu"
+                required
+            >
             <button type="submit">Szukaj</button>
         </form>
 
-        <div id="results-container">
-            {% if results %}
-                {% for row in results %}
-                    <div class="result">
-                        <strong>{{ row["PROJEKT"] }}</strong><br>
-                        Miejsce: {{ row["MIEJSCE"] }}<br>
-                        Sekcja: {{ row["SEKCJA"] }}
-                    </div>
-                {% endfor %}
-            {% elif query %}
-                <p class="no-results">Brak wyników dla: <strong>{{ query }}</strong></p>
-            {% endif %}
-        </div>
-
     </div>
 </main>
-
-<script>
-if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/static/sw.js");
-}
-</script>
 
 </body>
 </html>
