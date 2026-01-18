@@ -332,3 +332,38 @@ html, body {
 }
 
 /* Lepsze spacingi na bardzo małych ekranach*
+/* =========================
+   MOBILE ONLY
+   ========================= */
+@media (max-width: 767px) {
+
+  /* layout */
+  .container {
+    padding: 12px;
+  }
+
+  .tech-card {
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  /* formularz */
+  .search-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .search-form input,
+  .search-form button {
+    width: 100%;
+    padding: 14px;
+  }
+
+  /* wyniki */
+  .result-card {
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+
+}
