@@ -222,3 +222,37 @@ html, body {
   margin: 0 auto 16px auto;
   display: block;
 }
+/* =========================
+   MOBILE – FORMULARZ
+   ========================= */
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 12px;
+}
+
+/* Input */
+.search-form input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1rem;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+/* Button */
+.search-form button {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  border-radius: 10px;
+}
+
+/* Focus – neon tech */
+.search-form input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.4);
+}
