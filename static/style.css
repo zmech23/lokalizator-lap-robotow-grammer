@@ -125,37 +125,42 @@ body {
   padding-top: 12px;
   border-top: 1px solid rgba(255,255,255,0.08);
   width: 100%;
-  color: #e6f1ff;
   font-size: 15px;
-}
-
-.results-title {
-  margin-bottom: 14px;
-  font-size: 13px;
-  letter-spacing: 1px;
-  opacity: 0.6;
-  text-transform: uppercase;
 }
 
 /* POJEDYNCZY WYNIK */
 .result-card {
-  background: rgba(255,255,255,0.04);
-  border-left: 3px solid #facc15;
-  border-radius: 10px;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.06),
+    rgba(255,255,255,0.025)
+  );
+  border-left: 4px solid #facc15;
+  border-radius: 12px;
   padding: 14px 18px;
   margin-bottom: 18px;
 }
 
+/* WIERSZE */
 .result-card div {
   margin-bottom: 6px;
   line-height: 1.7;
 }
 
-.result-card span {
+/* ETYKIETY */
+.result-label {
   display: inline-block;
-  min-width: 85px;
+  min-width: 90px;
   font-weight: 600;
   color: #facc15;
+  letter-spacing: 0.3px;
+  text-shadow: 0 0 6px rgba(250, 204, 21, 0.35);
+}
+
+/* WARTOŚCI */
+.result-value {
+  color: #e6f1ff;
+  font-weight: 500;
 }
 
 /* BRAK WYNIKÓW */
