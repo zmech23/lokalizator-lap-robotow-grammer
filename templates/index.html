@@ -3,28 +3,26 @@
 <head>
     <meta charset="UTF-8">
 
-    <!-- RWD – MUSI BYĆ -->
+    <!-- RWD -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- IKONY -->
-<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
-
-<!-- iOS -->
-<link rel="apple-touch-icon" sizes="180x180"
-      href="{{ url_for('static', filename='icon-180.png') }}">
-
-<!-- ANDROID / PWA -->
-<link rel="icon" type="image/png" sizes="192x192"
-      href="{{ url_for('static', filename='icon-192.png') }}">
-
-<link rel="icon" type="image/png" sizes="512x512"
-      href="{{ url_for('static', filename='icon-512.png') }}">
 
     <title>Lokalizator Łap Robotów</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- FAVICON / IKONY -->
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="{{ url_for('static', filename='icon-192.png') }}">
+
+    <link rel="apple-touch-icon" sizes="180x180"
+          href="{{ url_for('static', filename='icon-180.png') }}">
+
+    <!-- PWA -->
+    <link rel="manifest"
+          href="{{ url_for('static', filename='manifest.json') }}">
 </head>
+
 <body>
 
 <div class="container">
