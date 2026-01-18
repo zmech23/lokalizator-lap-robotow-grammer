@@ -14,6 +14,12 @@
     <div class="tech-card">
       <div class="circuit-bg"></div>
 
+        {% if result %}
+  <div style="margin-top:20px; opacity:0.9;">
+    {{ result }}
+  </div>
+{% endif %}
+
       <img
         src="{{ url_for('static', filename='technik.png') }}"
         alt="Technik"
