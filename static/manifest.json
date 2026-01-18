@@ -1,10 +1,10 @@
 {
-  "name": "Lokalizator Łap Robotów Grammer",
+  "name": "Lokalizator Łap Robotów",
   "short_name": "Lokalizator",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#020812",
+  "theme_color": "#020812",
   "icons": [
     {
       "src": "/static/icon-192.png",
