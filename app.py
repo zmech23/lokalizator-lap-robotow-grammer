@@ -3,18 +3,20 @@ import pandas as pd
 
 app = Flask(__name__)
 
-# Wczytaj Excel
+# Wczytanie Excela
 df = pd.read_excel("data.xlsx", dtype=str)
 df.columns = ["PROJEKT", "MIEJSCE", "SEKCJA"]
 df = df.fillna("")
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET"])
 def index():
-    query = request.form.get("project_number", "").strip().upper()
+    query = request.args.get("q", "").strip().upper()
     wyniki = []
 
     if query:
-        wyniki = df[df["PROJEKT"].str.upper().str.contains(query)].to_dict(orient="records")
+        wyniki = df[
+            df["PROJEKT"].str.upper().str.contains(query, na=False)
+        ].to_dict(orient="records")
 
     return render_template(
         "index.html",
