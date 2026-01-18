@@ -9,7 +9,6 @@
 
 <div class="container">
   <div class="center-stack">
-
     <h1 class="title">LOKALIZATOR ŁAP ROBOTÓW</h1>
 
     <div class="tech-card">
@@ -21,10 +20,11 @@
         class="tech-hero"
       >
 
-      <form method="POST" class="search-form">
+      <!-- FORMULARZ -->
+      <form method="GET" class="search-form">
         <input
           type="text"
-          name="project_number"
+          name="q"
           placeholder="Wpisz numer projektu"
           value="{{ query }}"
           required
@@ -32,22 +32,26 @@
         <button type="submit">Szukaj</button>
       </form>
 
-{% if wyniki %}
-<div class="results-box">
-  {% for w in wyniki %}
-    <div class="result-row">
-      <div><span>Projekt:</span> {{ w.PROJEKT }}</div>
-      <div><span>Miejsce:</span> {{ w.MIEJSCE }}</div>
-      <div><span>Sekcja:</span> {{ w.SEKCJA }}</div>
-    </div>
-  {% endfor %}
-</div>
-{% elif query %}
-<div class="results-box">
-  <div class="no-results">Brak wyników dla podanego projektu</div>
-</div>
-{% endif %}
+      <!-- WYNIKI -->
+      {% if wyniki %}
+        <div class="results-box">
 
+          <div class="results-title">Wyniki wyszukiwania</div>
+
+          {% for w in wyniki %}
+            <div class="result-card">
+              <div><span>Projekt:</span> {{ w.PROJEKT }}</div>
+              <div><span>Miejsce:</span> {{ w.MIEJSCE }}</div>
+              <div><span>Sekcja:</span> {{ w.SEKCJA }}</div>
+            </div>
+          {% endfor %}
+
+        </div>
+      {% elif query %}
+        <div class="no-results">
+          Brak wyników dla podanego projektu
+        </div>
+      {% endif %}
 
     </div>
   </div>
