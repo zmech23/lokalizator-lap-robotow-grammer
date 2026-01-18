@@ -10,21 +10,17 @@
 <div class="container">
   <div class="center-stack">
 
-    <!-- TYTUŁ -->
     <h1 class="title">LOKALIZATOR ŁAP ROBOTÓW</h1>
 
-    <!-- KARTA NEONOWA -->
     <div class="tech-card">
       <div class="circuit-bg"></div>
 
-      <!-- TECHNIK -->
       <img
         src="{{ url_for('static', filename='technik.png') }}"
         alt="Technik"
         class="tech-hero"
       >
 
-      <!-- FORMULARZ -->
       <form method="POST" class="search-form">
         <input
           type="text"
@@ -36,7 +32,6 @@
         <button type="submit">Szukaj</button>
       </form>
 
-      <!-- WYNIKI -->
       {% if wyniki %}
         <div class="results">
           {% for w in wyniki %}
@@ -48,4 +43,14 @@
         </div>
 
       {% elif query %}
-        <div
+        <div class="no-results">
+          Brak wyników dla projektu <strong>{{ query }}</strong>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
