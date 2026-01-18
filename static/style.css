@@ -178,192 +178,110 @@ body {
   background: rgba(255,255,255,0.07);
   transform: translateY(-1px);
 }
-/* =========================
-   MOBILE FIRST – LAYOUT
-   ========================= */
 
-/* Reset szerokości i scrolla */
-html, body {
-  width: 100%;
-  overflow-x: hidden;
-}
+/* =====================================================
+   MOBILE ONLY – IDEALNY POD TEN LAYOUT
+   breakpoint: 768px
+   ===================================================== */
+@media (max-width: 768px) {
 
-/* Główny wrapper */
-.container {
-  padding: 12px;
-}
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+  }
 
-/* Stack zamiast centrowania desktopowego */
-.center-stack {
-  width: 100%;
-  align-items: stretch;
-}
+  body {
+    align-items: flex-start;
+  }
 
-/* Karta główna */
-.tech-card {
-  width: 100%;
-  padding: 16px;
-  border-radius: 14px;
-  box-sizing: border-box;
-}
-
-/* Tytuł */
-.title {
-  font-size: 1.4rem;
-  text-align: center;
-  margin-bottom: 12px;
-}
-
-/* Obraz technika */
-.tech-hero {
-  width: 100%;
-  max-width: 220px;
-  height: auto;
-  margin: 0 auto 16px auto;
-  display: block;
-}
-/* =========================
-   MOBILE – FORMULARZ
-   ========================= */
-
-.search-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-  margin-top: 12px;
-}
-
-/* Input */
-.search-form input {
-  width: 100%;
-  padding: 14px 16px;
-  font-size: 1rem;
-  border-radius: 10px;
-  box-sizing: border-box;
-}
-
-/* Button */
-.search-form button {
-  width: 100%;
-  padding: 14px;
-  font-size: 1rem;
-  border-radius: 10px;
-}
-
-/* Focus – neon tech */
-.search-form input:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.4);
-}
-/* =========================
-   MOBILE – WYNIKI
-   ========================= */
-
-.results-box {
-  margin-top: 16px;
-  padding: 0;
-}
-
-/* Tytuł wyników */
-.results-title {
-  font-size: 0.95rem;
-  margin-bottom: 10px;
-  opacity: 0.85;
-}
-
-/* Karta pojedynczego wyniku */
-.result-card {
-  padding: 12px 14px;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  box-sizing: border-box;
-}
-
-/* Każda linia w karcie */
-.result-card > div {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 6px;
-}
-
-/* Etykieta */
-.result-label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  opacity: 0.7;
-}
-
-/* Wartość */
-.result-value {
-  font-size: 0.95rem;
-  font
-/* =========================
-   MOBILE – POLISH
-   ========================= */
-
-/* Delikatne oddychanie layoutu */
-.tech-card {
-  margin-bottom: 16px;
-}
-
-/* Neonowy akcent karty (subtelny) */
-.tech-card {
-  box-shadow:
-    0 0 12px rgba(0, 255, 255, 0.08),
-    0 0 28px rgba(0, 180, 255, 0.05);
-}
-
-/* Tap feedback – button */
-.search-form button:active {
-  transform: scale(0.97);
-}
-
-/* Tap feedback – result */
-.result-card:active {
-  transform: scale(0.99);
-}
-
-/* Smoothness */
-.search-form button,
-.result-card {
-  transition: transform 0.12s ease;
-}
-
-/* Lepsze spacingi na bardzo małych ekranach*
-/* =========================
-   MOBILE ONLY
-   ========================= */
-@media (max-width: 767px) {
-
-  /* layout */
   .container {
     padding: 12px;
   }
 
-  .tech-card {
+  .center-stack {
     width: 100%;
-    padding: 16px;
-    border-radius: 14px;
+    align-items: stretch;
   }
 
-  /* formularz */
+  /* KARTA */
+  .tech-card {
+    width: 100%;
+    padding: 20px 16px 18px;
+    border-radius: 14px;
+    box-shadow:
+      0 0 12px rgba(0, 255, 255, 0.08),
+      0 0 28px rgba(0, 180, 255, 0.05);
+  }
+
+  /* TYTUŁ */
+  .title {
+    font-size: 1.4rem;
+    margin-bottom: 14px;
+  }
+
+  /* OBRAZ – NIE ZMNIEJSZAMY */
+  .tech-hero {
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    margin: 0 auto 16px;
+  }
+
+  /* FORMULARZ */
   .search-form {
     flex-direction: column;
     gap: 10px;
+    width: 100%;
+    margin-top: 10px;
   }
 
   .search-form input,
   .search-form button {
     width: 100%;
     padding: 14px;
+    font-size: 1rem;
   }
 
-  /* wyniki */
+  .search-form input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.4);
+  }
+
+  .search-form button:active {
+    transform: scale(0.97);
+  }
+
+  /* WYNIKI */
+  .results-box {
+    margin-top: 16px;
+    padding-top: 10px;
+    font-size: 0.95rem;
+  }
+
   .result-card {
     padding: 12px 14px;
     margin-bottom: 10px;
+    border-radius: 10px;
+    transition: transform 0.12s ease;
   }
 
-}
+  .result-card > div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 6px;
+  }
+
+  .result-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+  }
+
+  .result-value {
+    font-size: 0.95rem;
+  }
+
+  .result-card:active {
+    transform: scale(0.99);
+  }
