@@ -14,6 +14,7 @@
     <div class="tech-card">
       <div class="circuit-bg"></div>
 
+      <!-- OBRAZEK -->
       <img
         src="{{ url_for('static', filename='technik.png') }}"
         alt="Technik"
@@ -34,18 +35,30 @@
 
       <!-- WYNIKI -->
       {% if wyniki %}
-        <div class="results">
+        <div class="results-box">
           {% for r in wyniki %}
             <div class="result-card">
-              <strong>Projekt:</strong> {{ r.PROJEKT }}<br>
-              <strong>Miejsce:</strong> {{ r.MIEJSCE }}<br>
-              <strong>Sekcja:</strong> {{ r.SEKCJA }}
+              <div>
+                <span class="result-label">Projekt:</span>
+                <span class="result-value">{{ r.PROJEKT }}</span>
+              </div>
+              <div>
+                <span class="result-label">Miejsce:</span>
+                <span class="result-value">{{ r.MIEJSCE }}</span>
+              </div>
+              <div>
+                <span class="result-label">Sekcja:</span>
+                <span class="result-value">{{ r.SEKCJA }}</span>
+              </div>
             </div>
           {% endfor %}
         </div>
+
       {% elif query %}
-        <div class="results">
-          <em>Brak wyników dla projektu: {{ query }}</em>
+        <div class="results-box">
+          <div class="no-results">
+            Brak wyników dla projektu: <strong>{{ query }}</strong>
+          </div>
         </div>
       {% endif %}
 
