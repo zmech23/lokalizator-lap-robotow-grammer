@@ -10,13 +10,22 @@ df = df.fillna("")
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    query = request.args.get("q", "").strip().upper()
+    query = ""
     wyniki = []
 
-    if query:
-        wyniki = df[df["PROJEKT"].str.upper().str.contains(query)].to_dict(orient="records")
+    if request.method == "POST":
+        query = request.form.get("project_number", "").strip().upper()
 
-    return render_template("index.html", query=query, wyniki=wyniki)
+        if query:
+            wyniki = df[
+                df["PROJEKT"].str.upper().str.contains(query, na=False)
+            ].to_dict(orient="records")
+
+    return render_template(
+        "index.html",
+        query=query,
+        wyniki=wyniki
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)
