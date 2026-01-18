@@ -119,3 +119,31 @@ body {
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(0,0,0,0.35);
 }
+.results-box {
+  margin-top: 24px;
+  width: 100%;
+  color: #e6f1ff;
+  font-size: 15px;
+}
+
+.result-row {
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-left: 3px solid #facc15;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  line-height: 1.6;
+}
+
+.result-row span {
+  display: inline-block;
+  width: 80px;
+  font-weight: 600;
+  color: #facc15;
+}
+
+.no-results {
+  margin-top: 16px;
+  opacity: 0.7;
+  font-style: italic;
+}
