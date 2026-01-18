@@ -32,21 +32,22 @@
         <button type="submit">Szukaj</button>
       </form>
 
-      {% if wyniki %}
-        <div class="results">
-          {% for w in wyniki %}
-            <div class="result">
-              <div class="proj">{{ w.PROJEKT }}</div>
-              <div>{{ w.MIEJSCE }} — {{ w.SEKCJA }}</div>
-            </div>
-          {% endfor %}
-        </div>
+{% if wyniki %}
+<div class="results-box">
+  {% for w in wyniki %}
+    <div class="result-row">
+      <div><span>Projekt:</span> {{ w.PROJEKT }}</div>
+      <div><span>Miejsce:</span> {{ w.MIEJSCE }}</div>
+      <div><span>Sekcja:</span> {{ w.SEKCJA }}</div>
+    </div>
+  {% endfor %}
+</div>
+{% elif query %}
+<div class="results-box">
+  <div class="no-results">Brak wyników dla podanego projektu</div>
+</div>
+{% endif %}
 
-      {% elif query %}
-        <div class="no-results">
-          Brak wyników dla projektu <strong>{{ query }}</strong>
-        </div>
-      {% endif %}
 
     </div>
   </div>
