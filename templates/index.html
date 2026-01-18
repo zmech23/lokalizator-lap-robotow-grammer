@@ -11,14 +11,14 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-    <!-- FAVICON / IKONY -->
+    <!-- IKONY / FAVICON -->
     <link rel="icon" type="image/png" sizes="192x192"
           href="{{ url_for('static', filename='icon-192.png') }}">
 
     <link rel="apple-touch-icon" sizes="180x180"
           href="{{ url_for('static', filename='icon-180.png') }}">
 
-    <!-- PWA -->
+    <!-- PWA MANIFEST -->
     <link rel="manifest"
           href="{{ url_for('static', filename='manifest.json') }}">
 </head>
@@ -28,23 +28,18 @@
 <div class="container">
   <div class="center-stack">
 
-    <!-- TYTUŁ -->
     <h1 class="title">LOKALIZATOR ŁAP ROBOTÓW</h1>
 
-    <!-- KARTA -->
     <div class="tech-card">
 
-      <!-- TŁO -->
       <div class="circuit-bg"></div>
 
-      <!-- OBRAZ -->
       <img
         src="{{ url_for('static', filename='technik.png') }}"
         alt="Technik"
         class="tech-hero"
       >
 
-      <!-- FORMULARZ -->
       <form method="GET" class="search-form">
         <input
           type="text"
@@ -56,10 +51,8 @@
         <button type="submit">Szukaj</button>
       </form>
 
-      <!-- WYNIKI -->
       {% if wyniki %}
         <div class="results-box">
-
           <div class="results-title">
             Znaleziono {{ wyniki|length }} wyników
           </div>
@@ -80,7 +73,6 @@
               </div>
             </div>
           {% endfor %}
-
         </div>
 
       {% elif query %}
