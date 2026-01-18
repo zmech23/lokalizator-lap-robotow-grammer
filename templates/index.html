@@ -1,19 +1,35 @@
-<div class="container">
-  <h1 class="title">LOKALIZATOR ŁAP ROBOTÓW</h1>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Lokalizator Łap Robotów</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
 
-  <div class="tech-card">
-    <img src="{{ url_for('static', filename='technik.png') }}"
-         alt="Technik"
-         class="tech-hero">
+<div class="page">
+    <h1 class="page-title">LOKALIZATOR ŁAP ROBOTÓW</h1>
 
-    <form method="POST" class="search-form">
-      <input
-        type="text"
-        name="project_number"
-        placeholder="Wpisz numer projektu"
-        required
-      >
-      <button type="submit">Szukaj</button>
-    </form>
-  </div>
+    <div class="tech-card">
+        <!-- TECHNIK -->
+        <img
+            src="{{ url_for('static', filename='technik.png') }}"
+            alt="Technik"
+            class="tech-hero"
+        >
+
+        <!-- FORMULARZ -->
+        <form method="POST" class="search-form">
+            <input
+                type="text"
+                name="project_number"
+                placeholder="Wpisz numer projektu"
+                required
+            >
+            <button type="submit">Szukaj</button>
+        </form>
+    </div>
 </div>
+
+</body>
+</html>
