@@ -299,3 +299,36 @@ html, body {
 .result-value {
   font-size: 0.95rem;
   font
+/* =========================
+   MOBILE – POLISH
+   ========================= */
+
+/* Delikatne oddychanie layoutu */
+.tech-card {
+  margin-bottom: 16px;
+}
+
+/* Neonowy akcent karty (subtelny) */
+.tech-card {
+  box-shadow:
+    0 0 12px rgba(0, 255, 255, 0.08),
+    0 0 28px rgba(0, 180, 255, 0.05);
+}
+
+/* Tap feedback – button */
+.search-form button:active {
+  transform: scale(0.97);
+}
+
+/* Tap feedback – result */
+.result-card:active {
+  transform: scale(0.99);
+}
+
+/* Smoothness */
+.search-form button,
+.result-card {
+  transition: transform 0.12s ease;
+}
+
+/* Lepsze spacingi na bardzo małych ekranach*
