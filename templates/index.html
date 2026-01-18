@@ -8,26 +8,26 @@
 <body>
 
 <div class="container">
-  <h1 class="title">LOKALIZATOR ŁAP ROBOTÓW</h1>
+  <div class="center-stack">
+    <h1 class="title">LOKALIZATOR ŁAP ROBOTÓW</h1>
 
-  <div class="tech-card">
+    <div class="tech-card">
+      <div class="circuit-bg"></div>
 
-        <!-- TECHNIK -->
-        <img
-            src="{{ url_for('static', filename='technik.png') }}"
-            alt="Technik"
-            class="tech-hero"
+      <img
+        src="{{ url_for('static', filename='technik.png') }}"
+        alt="Technik"
+        class="tech-hero"
+      >
+
+      <form method="POST" class="search-form">
+        <input
+          type="text"
+          name="project_number"
+          placeholder="Wpisz numer projektu"
+          required
         >
-
-        <!-- FORMULARZ -->
-        <form method="POST" class="search-form">
-            <input
-                type="text"
-                name="project_number"
-                placeholder="Wpisz numer projektu"
-                required
-            >
-            <button type="submit">Szukaj</button>
+        <button type="submit">Szukaj</button>
         </form>
     </div>
 </div>
