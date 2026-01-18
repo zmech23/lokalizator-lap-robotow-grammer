@@ -1,46 +1,19 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Lokalizator Łap Robotów Grammer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="container">
+  <h1 class="title">LOKALIZATOR ŁAP ROBOTÓW</h1>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+  <div class="tech-card">
+    <img src="{{ url_for('static', filename='technik.png') }}"
+         alt="Technik"
+         class="tech-hero">
 
-<div class="page">
-    <div class="card glow">
-
-        <h1 class="title">LOKALIZATOR ŁAP<br>ROBOTÓW GRAMMER</h1>
-
-        <form method="get" class="search-form">
-            <input
-                type="text"
-                name="q"
-                placeholder="Wpisz numer projektu"
-                value="{{ query if query else '' }}"
-                required
-            >
-            <button type="submit">SZUKAJ</button>
-        </form>
-
-        {% if results %}
-            <div class="results">
-                {% for row in results %}
-                    <div class="result">
-                        <div class="proj">{{ row["PROJEKT"] }}</div>
-                        <div>Miejsce: <strong>{{ row["MIEJSCE"] }}</strong></div>
-                        <div>Sekcja: <strong>{{ row["SEKCJA"] }}</strong></div>
-                    </div>
-                {% endfor %}
-            </div>
-        {% elif query %}
-            <div class="no-results">Brak wyników</div>
-        {% endif %}
-
-    </div>
+    <form method="POST" class="search-form">
+      <input
+        type="text"
+        name="project_number"
+        placeholder="Wpisz numer projektu"
+        required
+      >
+      <button type="submit">Szukaj</button>
+    </form>
+  </div>
 </div>
-
-</body>
-</html>
