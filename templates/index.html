@@ -2,22 +2,30 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <!-- KLUCZOWA POPRAWKA RWD -->
+
+    <!-- RWD – MUSI BYĆ -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Lokalizator Łap Robotów</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <div class="container">
   <div class="center-stack">
+
+    <!-- TYTUŁ -->
     <h1 class="title">LOKALIZATOR ŁAP ROBOTÓW</h1>
 
+    <!-- KARTA -->
     <div class="tech-card">
+
+      <!-- TŁO -->
       <div class="circuit-bg"></div>
 
-      <!-- OBRAZEK -->
+      <!-- OBRAZ -->
       <img
         src="{{ url_for('static', filename='technik.png') }}"
         alt="Technik"
@@ -60,6 +68,7 @@
               </div>
             </div>
           {% endfor %}
+
         </div>
 
       {% elif query %}
