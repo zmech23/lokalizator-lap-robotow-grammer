@@ -22,7 +22,5 @@ def index():
         wyniki=wyniki
     )
 
-    )
-
 if __name__ == "__main__":
     app.run(debug=True)
