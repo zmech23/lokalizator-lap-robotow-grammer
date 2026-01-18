@@ -36,6 +36,11 @@
       <!-- WYNIKI -->
       {% if wyniki %}
         <div class="results-box">
+
+          <div class="results-title">
+            Znaleziono {{ wyniki|length }} wyników
+          </div>
+
           {% for r in wyniki %}
             <div class="result-card">
               <div>
