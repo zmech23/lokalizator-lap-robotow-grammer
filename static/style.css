@@ -73,9 +73,7 @@ body {
   margin: 0 auto 30px;
   width: 160px;
   z-index: 2;
-
   animation: float 4s ease-in-out infinite;
-
   filter:
     drop-shadow(0 0 12px rgba(0, 200, 255, 0.6))
     drop-shadow(0 0 28px rgba(0, 200, 255, 0.35));
@@ -119,31 +117,50 @@ body {
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(0,0,0,0.35);
 }
+
+/* ===== WYNIKI ===== */
+
 .results-box {
-  margin-top: 24px;
+  margin-top: 28px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.08);
   width: 100%;
   color: #e6f1ff;
   font-size: 15px;
 }
 
-.result-row {
-  margin-bottom: 18px;
-  padding: 12px 14px;
-  border-left: 3px solid #facc15;
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 8px;
-  line-height: 1.6;
+.results-title {
+  margin-bottom: 14px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  opacity: 0.6;
+  text-transform: uppercase;
 }
 
-.result-row span {
+/* POJEDYNCZY WYNIK */
+.result-card {
+  background: rgba(255,255,255,0.04);
+  border-left: 3px solid #facc15;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+}
+
+.result-card div {
+  margin-bottom: 6px;
+  line-height: 1.7;
+}
+
+.result-card span {
   display: inline-block;
-  width: 80px;
+  min-width: 85px;
   font-weight: 600;
   color: #facc15;
 }
 
+/* BRAK WYNIKÓW */
 .no-results {
-  margin-top: 16px;
+  margin-top: 18px;
   opacity: 0.7;
   font-style: italic;
 }
