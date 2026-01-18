@@ -34,22 +34,18 @@
 
       <!-- WYNIKI -->
       {% if wyniki %}
-        <div class="results-box">
-
-          <div class="results-title">Wyniki wyszukiwania</div>
-
-          {% for w in wyniki %}
+        <div class="results">
+          {% for r in wyniki %}
             <div class="result-card">
-              <div><span>Projekt:</span> {{ w.PROJEKT }}</div>
-              <div><span>Miejsce:</span> {{ w.MIEJSCE }}</div>
-              <div><span>Sekcja:</span> {{ w.SEKCJA }}</div>
+              <strong>Projekt:</strong> {{ r.PROJEKT }}<br>
+              <strong>Miejsce:</strong> {{ r.MIEJSCE }}<br>
+              <strong>Sekcja:</strong> {{ r.SEKCJA }}
             </div>
           {% endfor %}
-
         </div>
       {% elif query %}
-        <div class="no-results">
-          Brak wyników dla podanego projektu
+        <div class="results">
+          <em>Brak wyników dla projektu: {{ query }}</em>
         </div>
       {% endif %}
 
