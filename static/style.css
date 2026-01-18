@@ -1,4 +1,6 @@
-/* RESET */
+/* =========================
+   1. RESET / BASE
+   ========================= */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,7 +8,9 @@
   font-family: "Segoe UI", system-ui, sans-serif;
 }
 
-/* TŁO STRONY */
+/* =========================
+   2. TŁO / BODY
+   ========================= */
 body {
   min-height: 100vh;
   background: radial-gradient(circle at top, #0f2027, #020812 70%);
@@ -16,7 +20,9 @@ body {
   color: #ffffff;
 }
 
-/* UKŁAD */
+/* =========================
+   3. LAYOUT (DESKTOP DEFAULT)
+   ========================= */
 .container {
   width: 100%;
   display: flex;
@@ -29,7 +35,9 @@ body {
   align-items: center;
 }
 
-/* TYTUŁ */
+/* =========================
+   4. TYTUŁ
+   ========================= */
 .title {
   margin-bottom: 28px;
   font-size: 22px;
@@ -39,7 +47,9 @@ body {
   text-align: center;
 }
 
-/* KARTA */
+/* =========================
+   5. KARTA
+   ========================= */
 .tech-card {
   position: relative;
   width: 520px;
@@ -66,7 +76,9 @@ body {
   pointer-events: none;
 }
 
-/* TECHNIK */
+/* =========================
+   6. OBRAZ / ANIMACJA
+   ========================= */
 .tech-hero {
   position: relative;
   display: block;
@@ -79,14 +91,15 @@ body {
     drop-shadow(0 0 28px rgba(0, 200, 255, 0.35));
 }
 
-/* LEWITACJA */
 @keyframes float {
   0%   { transform: translateY(0); }
   50%  { transform: translateY(-14px); }
   100% { transform: translateY(0); }
 }
 
-/* FORMULARZ */
+/* =========================
+   7. FORMULARZ
+   ========================= */
 .search-form {
   display: flex;
   gap: 16px;
@@ -118,8 +131,9 @@ body {
   box-shadow: 0 6px 16px rgba(0,0,0,0.35);
 }
 
-/* ===== WYNIKI ===== */
-
+/* =========================
+   8. WYNIKI
+   ========================= */
 .results-box {
   margin-top: 28px;
   padding-top: 12px;
@@ -128,7 +142,6 @@ body {
   font-size: 15px;
 }
 
-/* POJEDYNCZY WYNIK */
 .result-card {
   background: linear-gradient(
     135deg,
@@ -139,15 +152,19 @@ body {
   border-radius: 12px;
   padding: 14px 18px;
   margin-bottom: 18px;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
-/* WIERSZE */
+.result-card:hover {
+  background: rgba(255,255,255,0.07);
+  transform: translateY(-1px);
+}
+
 .result-card div {
   margin-bottom: 6px;
   line-height: 1.7;
 }
 
-/* ETYKIETY */
 .result-label {
   display: inline-block;
   min-width: 90px;
@@ -157,31 +174,19 @@ body {
   text-shadow: 0 0 6px rgba(250, 204, 21, 0.35);
 }
 
-/* WARTOŚCI */
 .result-value {
   color: #e6f1ff;
   font-weight: 500;
 }
 
-/* BRAK WYNIKÓW */
 .no-results {
   margin-top: 18px;
   opacity: 0.7;
   font-style: italic;
 }
-/* HOVER NA WYNIKACH */
-.result-card {
-  transition: background 0.15s ease, transform 0.15s ease;
-}
-
-.result-card:hover {
-  background: rgba(255,255,255,0.07);
-  transform: translateY(-1px);
-}
 
 /* =====================================================
-   MOBILE ONLY – IDEALNY POD TEN LAYOUT
-   breakpoint: 768px
+   9. MOBILE ONLY (<=768px)
    ===================================================== */
 @media (max-width: 768px) {
 
@@ -203,7 +208,6 @@ body {
     align-items: stretch;
   }
 
-  /* KARTA */
   .tech-card {
     width: 100%;
     padding: 20px 16px 18px;
@@ -213,21 +217,17 @@ body {
       0 0 28px rgba(0, 180, 255, 0.05);
   }
 
-  /* TYTUŁ */
   .title {
     font-size: 1.4rem;
     margin-bottom: 14px;
   }
 
-  /* OBRAZ – NIE ZMNIEJSZAMY */
   .tech-hero {
     width: 100%;
     max-width: 220px;
-    height: auto;
     margin: 0 auto 16px;
   }
 
-  /* FORMULARZ */
   .search-form {
     flex-direction: column;
     gap: 10px;
@@ -251,7 +251,6 @@ body {
     transform: scale(0.97);
   }
 
-  /* WYNIKI */
   .results-box {
     margin-top: 16px;
     padding-top: 10px;
@@ -262,13 +261,11 @@ body {
     padding: 12px 14px;
     margin-bottom: 10px;
     border-radius: 10px;
-    transition: transform 0.12s ease;
   }
 
   .result-card > div {
     display: flex;
     flex-direction: column;
-    margin-bottom: 6px;
   }
 
   .result-label {
@@ -285,3 +282,20 @@ body {
   .result-card:active {
     transform: scale(0.99);
   }
+}
+
+/* =====================================================
+   10. DEBUG / DEV – FORCE MOBILE
+   ===================================================== */
+body.is-mobile .tech-card {
+  width: 100%;
+}
+
+body.is-mobile .search-form {
+  flex-direction: column;
+}
+
+body.is-mobile .search-form input,
+body.is-mobile .search-form button {
+  width: 100%;
+}
