@@ -2,23 +2,17 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-
-    <!-- RWD -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Lokalizator Łap Robotów</title>
 
-    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-    <!-- IKONY / FAVICON -->
     <link rel="icon" type="image/png" sizes="192x192"
           href="{{ url_for('static', filename='icon-192.png') }}">
 
     <link rel="apple-touch-icon" sizes="180x180"
           href="{{ url_for('static', filename='icon-180.png') }}">
 
-    <!-- PWA MANIFEST -->
     <link rel="manifest"
           href="{{ url_for('static', filename='manifest.json') }}">
 </head>
@@ -40,12 +34,13 @@
         class="tech-hero"
       >
 
-      <form method="GET" class="search-form">
+      <!-- 🔥 ZMIANA: POST zamiast GET -->
+      <form method="POST" class="search-form">
         <input
           type="text"
           name="q"
           placeholder="Wpisz numer projektu"
-          value="{{ query }}"
+          value=""
           required
         >
         <button type="submit">Szukaj</button>
