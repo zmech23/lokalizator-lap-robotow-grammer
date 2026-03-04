@@ -8,15 +8,18 @@ df = pd.read_excel("data.xlsx", dtype=str)
 df.columns = ["PROJEKT", "MIEJSCE", "SEKCJA"]
 df = df.fillna("")
 
-@app.route("/", methods=["GET"])
+@app.route("/", methods=["GET", "POST"])
 def index():
-    query = request.args.get("q", "").strip().upper()
+    query = ""
     wyniki = []
 
-    if query:
-        wyniki = df[
-            df["PROJEKT"].str.upper().str.contains(query, na=False)
-        ].to_dict(orient="records")
+    if request.method == "POST":
+        query = request.form.get("q", "").strip().upper()
+
+        if query:
+            wyniki = df[
+                df["PROJEKT"].str.upper().str.contains(query, na=False)
+            ].to_dict(orient="records")
 
     return render_template(
         "index.html",
