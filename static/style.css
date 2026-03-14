@@ -41,15 +41,16 @@ body {
 }
 
 /* =========================
-   4. TYTUŁ (Zmieniony na czysty styl)
+   4. TYTUŁ (Podniesiony wyżej)
    ========================= */
 .title {
-  margin-bottom: 10px;
-  font-size: 32px;
-  letter-spacing: 5px;
-  font-weight: 800;
+  margin-top: -50px;    /* Podciąga tytuł do góry */
+  margin-bottom: 40px;  /* Zwiększa odstęp od logo */
+  font-size: 42px;      /* Jeszcze większy i wyraźniejszy */
+  letter-spacing: 8px;
+  font-weight: 900;
   color: #00d4ff;
-  text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+  text-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
   text-align: center;
   text-transform: uppercase;
 }
@@ -76,37 +77,43 @@ body {
 }
 
 /* =========================
-   6. LOGO (Powiększone, bez lewitacji)
+   6. LOGO (Jeszcze większe i wyżej)
    ========================= */
 .tech-hero {
   position: relative;
   display: block;
-  margin: 0 auto -20px; /* Ujemny margines przybliża logo do wyszukiwarki */
-  width: 450px;         /* Znacznie powiększone logo */
-  max-width: 90%;
+  margin: 0 auto 20px;  /* Zmienione z -20px na 20px, żeby nie nachodziło na pasek */
+  width: 550px;         /* Jeszcze większe logo */
+  max-width: 95%;
   z-index: 2;
-  animation: none;      /* WYŁĄCZONA LEWITACJA */
-  filter: drop-shadow(0 0 30px rgba(0, 170, 255, 0.3));
+  animation: none;
+  filter: drop-shadow(0 0 40px rgba(0, 170, 255, 0.4));
+  transition: transform 0.3s ease;
+}
+
+/* Delikatny efekt po najechaniu myszką na logo - dla profesjonalizmu */
+.tech-hero:hover {
+  transform: scale(1.02);
 }
 
 /* =========================
-   7. FORMULARZ (Styl High-Tech)
+   7. FORMULARZ (Dopasowanie odstępu)
    ========================= */
 .search-form {
+  margin-top: 10px;     /* Dodatkowy margines, by logo miało oddech */
   display: flex;
   gap: 0px;
   justify-content: center;
   position: relative;
   z-index: 3;
   width: 100%;
-  max-width: 500px;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 5px;
+  max-width: 550px;     /* Poszerzone, by pasowało do większego logo */
+  background: rgba(0, 0, 0, 0.7);
+  padding: 6px;
   border-radius: 12px;
-  border: 1px solid rgba(0, 170, 255, 0.5);
-  box-shadow: 0 0 20px rgba(0, 170, 255, 0.2);
+  border: 1px solid rgba(0, 170, 255, 0.6);
+  box-shadow: 0 0 30px rgba(0, 170, 255, 0.25);
 }
-
 .search-form input {
   flex: 1;
   padding: 15px 20px;
