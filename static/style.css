@@ -9,17 +9,28 @@
 }
 
 /* =========================
-   2. TŁO / BODY
+   2. TŁO / BODY (WIZJA 1: PŁYWAJĄCA HALA)
    ========================= */
 body {
-  min-height: 100vh;
-  /* Ciemne, głębokie tło pasujące do renderu */
-  background: radial-gradient(circle at center, #0a192f 0%, #020812 100%);
+  margin: 0;
+  padding: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  min-height: 100vh;
   color: #ffffff;
-  overflow-x: hidden;
+  
+  /* Podpinamy tło hali panoramicznej z delikatnym filtrem przyciemniającym */
+  background-image: linear-gradient(rgba(0, 5, 15, 0.85), rgba(0, 5, 15, 0.9)), url('../static/hala-tlo.jpg');
+  
+  /* Skalowanie na cały ekran (responsive cover) */
+  background-size: cover;          /* Obrazek pokryje cały ekran */
+  background-position: center;     /* Centruje zdjęcie */
+  background-attachment: fixed;    /* Tło stoi w miejscu, nawet jak przewijasz wyniki */
+  background-repeat: no-repeat;    /* Nie powtarza obrazka */
+  
+  /* Twoje pozostałe ustawienia (np. czcionka) */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* =========================
