@@ -13,289 +13,191 @@
    ========================= */
 body {
   min-height: 100vh;
-  background: radial-gradient(circle at top, #0f2027, #020812 70%);
+  /* Ciemne, głębokie tło pasujące do renderu */
+  background: radial-gradient(circle at center, #0a192f 0%, #020812 100%);
   display: flex;
   justify-content: center;
   align-items: center;
   color: #ffffff;
+  overflow-x: hidden;
 }
 
 /* =========================
-   3. LAYOUT (DESKTOP DEFAULT)
+   3. LAYOUT
    ========================= */
 .container {
   width: 100%;
   display: flex;
   justify-content: center;
+  padding: 20px;
 }
 
 .center-stack {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  max-width: 800px;
 }
 
 /* =========================
-   4. TYTUŁ
+   4. TYTUŁ (Zmieniony na czysty styl)
    ========================= */
 .title {
-  margin-bottom: 28px;
-  font-size: 22px;
-  letter-spacing: 2px;
-  font-weight: 600;
-  opacity: 0.9;
+  margin-bottom: 10px;
+  font-size: 32px;
+  letter-spacing: 5px;
+  font-weight: 800;
+  color: #00d4ff;
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
   text-align: center;
+  text-transform: uppercase;
 }
 
 /* =========================
-   5. KARTA
+   5. KARTA (Teraz przezroczysta, bez ramki)
    ========================= */
 .tech-card {
   position: relative;
-  width: 520px;
-  padding: 60px 40px 40px;
-  border-radius: 22px;
-  background: rgba(10, 25, 40, 0.88);
-  border: 1px solid rgba(0, 200, 255, 0.35);
-  box-shadow:
-    0 0 40px rgba(0, 200, 255, 0.18),
-    inset 0 0 25px rgba(0, 200, 255, 0.08);
-  backdrop-filter: blur(6px);
-  overflow: hidden;
+  width: 100%;
+  padding: 0px 20px;
+  background: transparent; /* Usunięcie tła karty */
+  border: none;             /* Usunięcie niebieskiej ramki */
+  box-shadow: none;         /* Usunięcie cienia/poświaty ramki */
+  backdrop-filter: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* TŁO CIRCUIT */
+/* Ukrywamy siatkę circuit-bg, by uzyskać czysty efekt logo */
 .circuit-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(0,200,255,0.05) 1px, transparent 1px),
-    linear-gradient(rgba(0,200,255,0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.35;
-  pointer-events: none;
+  display: none;
 }
 
 /* =========================
-   6. OBRAZ / ANIMACJA
+   6. LOGO (Powiększone, bez lewitacji)
    ========================= */
 .tech-hero {
   position: relative;
   display: block;
-  margin: 0 auto 30px;
-  width: 160px;
+  margin: 0 auto -20px; /* Ujemny margines przybliża logo do wyszukiwarki */
+  width: 450px;         /* Znacznie powiększone logo */
+  max-width: 90%;
   z-index: 2;
-  animation: float 4s ease-in-out infinite;
-  filter:
-    drop-shadow(0 0 12px rgba(0, 200, 255, 0.6))
-    drop-shadow(0 0 28px rgba(0, 200, 255, 0.35));
-}
-
-@keyframes float {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-14px); }
-  100% { transform: translateY(0); }
+  animation: none;      /* WYŁĄCZONA LEWITACJA */
+  filter: drop-shadow(0 0 30px rgba(0, 170, 255, 0.3));
 }
 
 /* =========================
-   7. FORMULARZ
+   7. FORMULARZ (Styl High-Tech)
    ========================= */
 .search-form {
   display: flex;
-  gap: 16px;
+  gap: 0px;
   justify-content: center;
   position: relative;
-  z-index: 2;
+  z-index: 3;
+  width: 100%;
+  max-width: 500px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 5px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 170, 255, 0.5);
+  box-shadow: 0 0 20px rgba(0, 170, 255, 0.2);
 }
 
 .search-form input {
   flex: 1;
-  padding: 14px 16px;
-  border-radius: 10px;
+  padding: 15px 20px;
+  border-radius: 8px 0 0 8px;
   border: none;
-  font-size: 15px;
+  background: transparent;
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-form input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .search-form button {
-  padding: 14px 24px;
-  border-radius: 10px;
+  padding: 0 30px;
+  border-radius: 0 8px 8px 0;
   border: none;
-  background: linear-gradient(135deg, #ffcc00, #ffb000);
-  font-weight: 600;
+  background: #00aaff;
+  color: #000;
+  font-weight: 700;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .search-form button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+  background: #00d4ff;
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
 }
 
 /* =========================
    8. WYNIKI
    ========================= */
 .results-box {
-  margin-top: 28px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 40px;
   width: 100%;
-  font-size: 15px;
+  max-width: 600px;
+  z-index: 2;
 }
 
 .result-card {
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,0.06),
-    rgba(255,255,255,0.025)
-  );
-  border-left: 4px solid #facc15;
-  border-radius: 12px;
-  padding: 14px 18px;
-  margin-bottom: 18px;
-  transition: background 0.15s ease, transform 0.15s ease;
-}
-
-.result-card:hover {
-  background: rgba(255,255,255,0.07);
-  transform: translateY(-1px);
-}
-
-.result-card div {
-  margin-bottom: 6px;
-  line-height: 1.7;
+  background: rgba(0, 170, 255, 0.05);
+  border: 1px solid rgba(0, 170, 255, 0.2);
+  border-left: 4px solid #00aaff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
 }
 
 .result-label {
-  display: inline-block;
-  min-width: 90px;
-  font-weight: 600;
-  color: #facc15;
-  letter-spacing: 0.3px;
-  text-shadow: 0 0 6px rgba(250, 204, 21, 0.35);
+  color: #00aaff;
+  font-weight: 700;
+  margin-right: 10px;
+  text-transform: uppercase;
+  font-size: 12px;
 }
 
 .result-value {
-  color: #e6f1ff;
-  font-weight: 500;
+  color: #ffffff;
 }
 
-.no-results {
-  margin-top: 18px;
-  opacity: 0.7;
-  font-style: italic;
-}
-
-/* =====================================================
-   9. MOBILE ONLY (<=768px)
-   ===================================================== */
+/* =========================
+   9. MOBILE
+   ========================= */
 @media (max-width: 768px) {
-
-  html, body {
-    width: 100%;
-    overflow-x: hidden;
-  }
-
-  body {
-    align-items: flex-start;
-  }
-
-  .container {
-    padding: 12px;
-  }
-
-  .center-stack {
-    width: 100%;
-    align-items: stretch;
-  }
-
-  .tech-card {
-    width: 100%;
-    padding: 20px 16px 18px;
-    border-radius: 14px;
-    box-shadow:
-      0 0 12px rgba(0, 255, 255, 0.08),
-      0 0 28px rgba(0, 180, 255, 0.05);
-  }
-
-  .title {
-    font-size: 1.4rem;
-    margin-bottom: 14px;
-  }
-
   .tech-hero {
-    width: 100%;
-    max-width: 220px;
-    margin: 0 auto 16px;
+    width: 300px;
+  }
+  
+  .title {
+    font-size: 24px;
   }
 
   .search-form {
     flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    margin-top: 10px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
   }
 
-  .search-form input,
-  .search-form button {
-    width: 100%;
-    padding: 14px;
-    font-size: 1rem;
-  }
-
-  .search-form input:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.4);
-  }
-
-  .search-form button:active {
-    transform: scale(0.97);
-  }
-
-  .results-box {
-    margin-top: 16px;
-    padding-top: 10px;
-    font-size: 0.95rem;
-  }
-
-  .result-card {
-    padding: 12px 14px;
-    margin-bottom: 10px;
+  .search-form input {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 170, 255, 0.5);
     border-radius: 10px;
+    margin-bottom: 10px;
   }
 
-  .result-card > div {
-    display: flex;
-    flex-direction: column;
+  .search-form button {
+    border-radius: 10px;
+    padding: 15px;
   }
-
-  .result-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    opacity: 0.7;
-  }
-
-  .result-value {
-    font-size: 0.95rem;
-  }
-
-  .result-card:active {
-    transform: scale(0.99);
-  }
-}
-
-/* =====================================================
-   10. DEBUG / DEV – FORCE MOBILE
-   ===================================================== */
-body.is-mobile .tech-card {
-  width: 100%;
-}
-
-body.is-mobile .search-form {
-  flex-direction: column;
-}
-
-body.is-mobile .search-form input,
-body.is-mobile .search-form button {
-  width: 100%;
 }
