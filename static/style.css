@@ -147,7 +147,7 @@ body {
 }
 
 /* =========================
-   8. WYNIKI
+   8. WYNIKI (Neonowa aktualizacja)
    ========================= */
 .results-box {
   margin-top: 40px;
@@ -157,26 +157,45 @@ body {
 }
 
 .result-card {
-  background: rgba(0, 170, 255, 0.05);
-  border: 1px solid rgba(0, 170, 255, 0.2);
-  border-left: 4px solid #00aaff;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 15px;
+  /* Tło: bardzo ciemne, półprzezroczyste */
+  background: rgba(0, 10, 20, 0.8); 
+  /* Neonowa niebieska ramka dookoła */
+  border: 1px solid rgba(0, 212, 255, 0.4);
+  /* Mocniejsza niebieska linia z boku */
+  border-left: 5px solid #00aaff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(0, 170, 255, 0.15);
+  backdrop-filter: blur(4px);
 }
 
 .result-label {
-  color: #00aaff;
-  font-weight: 700;
-  margin-right: 10px;
+  /* Neonowy żółty dla etykiet */
+  color: #ffcc00; 
+  font-weight: 800;
+  margin-right: 12px;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  /* Delikatna poświata tekstu */
+  text-shadow: 0 0 10px rgba(255, 204, 0, 0.4);
 }
 
 .result-value {
   color: #ffffff;
+  font-weight: 500;
+  font-size: 16px;
 }
 
+/* Styl dla tekstu "Znaleziono X wyników" */
+.results-box h3 {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 15px;
+  text-align: left;
+  padding-left: 5px;
+}
 /* =========================
    9. MOBILE
    ========================= */
