@@ -67,45 +67,33 @@ body {
 }
 
 /* =========================
-   5. KARTA (Teraz przezroczysta, bez ramki)
+   5. NAGŁÓWEK / TYTUŁ
    ========================= */
-.tech-card {
-  position: relative;
-  width: 100%;
-  padding: 0px 20px;
-  background: transparent; /* Usunięcie tła karty */
-  border: none;             /* Usunięcie niebieskiej ramki */
-  box-shadow: none;         /* Usunięcie cienia/poświaty ramki */
-  backdrop-filter: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Ukrywamy siatkę circuit-bg, by uzyskać czysty efekt logo */
-.circuit-bg {
-  display: none;
+.title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  color: #00d4ff;
+  text-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
+  margin-top: 100px; /* Obniżenie napisu jeszcze niżej */
+  margin-bottom: 30px;
 }
 
 /* =========================
-   6. LOGO (Jeszcze większe i wyżej)
+   6. LOGO (TECHNIK)
    ========================= */
 .tech-hero {
-  position: relative;
   display: block;
-  margin: 0 auto 20px;  /* Zmienione z -20px na 20px, żeby nie nachodziło na pasek */
-  width: 550px;         /* Jeszcze większe logo */
-  max-width: 95%;
-  z-index: 2;
-  animation: none;
-  filter: drop-shadow(0 0 40px rgba(0, 170, 255, 0.4));
+  margin: 0 auto 50px auto;
+  width: 100%;
+  max-width: 400px; /* Większe, profesjonalne logo */
+  filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.3));
   transition: transform 0.3s ease;
 }
 
-/* Delikatny efekt po najechaniu myszką na logo - dla profesjonalizmu */
 .tech-hero:hover {
-  transform: scale(1.02);
-}
+  transform: scale(1.05); /* Delikatne powiększenie po najechaniu */
 
 /* =========================
    7. FORMULARZ (Dopasowanie odstępu)
