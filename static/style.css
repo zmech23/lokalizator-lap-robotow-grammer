@@ -9,7 +9,7 @@
 }
 
 /* =========================
-   2. TŁO / BODY (WIZJA 1: PŁYWAJĄCA HALA)
+   2. TŁO / BODY (WIZJA: PŁYWAJĄCA HALA)
    ========================= */
 body {
   margin: 0;
@@ -20,16 +20,11 @@ body {
   min-height: 100vh;
   color: #ffffff;
   
-  /* Podpinamy tło hali panoramicznej z delikatnym filtrem przyciemniającym */
-  background-image: linear-gradient(rgba(0, 5, 15, 0.85), rgba(0, 5, 15, 0.9)), url('../static/hala-tlo.jpg');
+  /* Naprawiona ścieżka i filtr przyciemniający - tło hali */
+  background: linear-gradient(rgba(0, 5, 15, 0.85), rgba(0, 5, 15, 0.9)), 
+              url('hala-tlo.jpg') no-repeat center center fixed;
+  background-size: cover;
   
-  /* Skalowanie na cały ekran (responsive cover) */
-  background-size: cover;          /* Obrazek pokryje cały ekran */
-  background-position: center;     /* Centruje zdjęcie */
-  background-attachment: fixed;    /* Tło stoi w miejscu, nawet jak przewijasz wyniki */
-  background-repeat: no-repeat;    /* Nie powtarza obrazka */
-  
-  /* Twoje pozostałe ustawienia (np. czcionka) */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -52,22 +47,7 @@ body {
 }
 
 /* =========================
-   4. TYTUŁ (Podniesiony wyżej)
-   ========================= */
-.title {
-  margin-top: -50px;    /* Podciąga tytuł do góry */
-  margin-bottom: 40px;  /* Zwiększa odstęp od logo */
-  font-size: 42px;      /* Jeszcze większy i wyraźniejszy */
-  letter-spacing: 8px;
-  font-weight: 900;
-  color: #00d4ff;
-  text-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
-  text-align: center;
-  text-transform: uppercase;
-}
-
-/* =========================
-   5. NAGŁÓWEK / TYTUŁ
+   4. TYTUŁ (Obniżony i dopracowany)
    ========================= */
 .title {
   font-size: 3.5rem;
@@ -76,47 +56,49 @@ body {
   letter-spacing: 8px;
   color: #00d4ff;
   text-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
-  margin-top: 100px; /* Obniżenie napisu jeszcze niżej */
+  margin-top: 100px; /* Obniżenie napisu niżej dla oddechu */
   margin-bottom: 30px;
+  text-align: center;
 }
 
 /* =========================
-   6. LOGO (TECHNIK)
+   5. LOGO (TECHNIK)
    ========================= */
 .tech-hero {
   display: block;
   margin: 0 auto 50px auto;
   width: 100%;
-  max-width: 400px; /* Większe, profesjonalne logo */
+  max-width: 380px; /* Rozmiar dopasowany do jakości detali */
   filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.3));
   transition: transform 0.3s ease;
 }
 
 .tech-hero:hover {
-  transform: scale(1.05); /* Delikatne powiększenie po najechaniu */
+  transform: scale(1.05);
+} /* Poprawiony brakujący nawias */
 
 /* =========================
-   7. FORMULARZ (Dopasowanie odstępu)
+   6. FORMULARZ (Neonowy żółty przycisk)
    ========================= */
 .search-form {
-  margin-top: 10px;     /* Dodatkowy margines, by logo miało oddech */
+  margin-top: 10px;
   display: flex;
   gap: 0px;
   justify-content: center;
   position: relative;
   z-index: 3;
   width: 100%;
-  max-width: 550px;     /* Poszerzone, by pasowało do większego logo */
-  background: rgba(0, 0, 0, 0.7);
+  max-width: 600px;
+  background: rgba(0, 5, 15, 0.7); /* Szklany efekt */
   padding: 6px;
   border-radius: 12px;
-  border: 1px solid rgba(0, 170, 255, 0.6);
-  box-shadow: 0 0 30px rgba(0, 170, 255, 0.25);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
+
 .search-form input {
   flex: 1;
   padding: 15px 20px;
-  border-radius: 8px 0 0 8px;
   border: none;
   background: transparent;
   color: white;
@@ -129,24 +111,24 @@ body {
 }
 
 .search-form button {
-  padding: 0 30px;
-  border-radius: 0 8px 8px 0;
+  padding: 0 35px;
+  border-radius: 8px;
   border: none;
-  background: #00aaff;
+  background: #ffcc00; /* Neonowy żółty - spójny z wynikami */
   color: #000;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .search-form button:hover {
-  background: #00d4ff;
-  box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+  background: #ffe066;
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
 }
 
 /* =========================
-   8. WYNIKI (Neonowa aktualizacja)
+   7. WYNIKI (Neonowa aktualizacja)
    ========================= */
 .results-box {
   margin-top: 40px;
@@ -156,29 +138,24 @@ body {
 }
 
 .result-card {
-  /* Tło: bardzo ciemne, półprzezroczyste */
-  background: rgba(0, 10, 20, 0.8); 
-  /* Neonowa niebieska ramka dookoła */
+  background: rgba(0, 10, 20, 0.85); 
   border: 1px solid rgba(0, 212, 255, 0.4);
-  /* Mocniejsza niebieska linia z boku */
   border-left: 5px solid #00aaff;
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
-  box-shadow: 0 0 20px rgba(0, 170, 255, 0.15);
-  backdrop-filter: blur(4px);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
 }
 
 .result-label {
-  /* Neonowy żółty dla etykiet */
-  color: #ffcc00; 
+  color: #ffcc00; /* Żółte etykiety */
   font-weight: 800;
   margin-right: 12px;
   text-transform: uppercase;
   font-size: 13px;
   letter-spacing: 1px;
-  /* Delikatna poświata tekstu */
-  text-shadow: 0 0 10px rgba(255, 204, 0, 0.4);
+  text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
 }
 
 .result-value {
@@ -187,24 +164,24 @@ body {
   font-size: 16px;
 }
 
-/* Styl dla tekstu "Znaleziono X wyników" */
 .results-box h3 {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.6);
   margin-bottom: 15px;
-  text-align: left;
   padding-left: 5px;
 }
+
 /* =========================
-   9. MOBILE
+   8. MOBILE
    ========================= */
 @media (max-width: 768px) {
   .tech-hero {
-    width: 300px;
+    width: 280px;
   }
   
   .title {
-    font-size: 24px;
+    font-size: 2rem;
+    margin-top: 50px;
   }
 
   .search-form {
@@ -216,7 +193,7 @@ body {
 
   .search-form input {
     background: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(0, 170, 255, 0.5);
+    border: 1px solid rgba(0, 212, 255, 0.5);
     border-radius: 10px;
     margin-bottom: 10px;
   }
