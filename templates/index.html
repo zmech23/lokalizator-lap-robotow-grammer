@@ -4,78 +4,266 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lokalizator Łap Robotów</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<link rel="icon" type="image/png" sizes="192x192"
-href="{{ url_for('static', filename='icon-192.png') }}">
-<link rel="apple-touch-icon" sizes="180x180"
-href="{{ url_for('static', filename='icon-180.png') }}">
-<link rel="manifest"
-href="{{ url_for('static', filename='manifest.json') }}">
+<link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='icon-192.png') }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='icon-180.png') }}">
+<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+<style>
+/* ── RESET ── */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: "Segoe UI", system-ui, sans-serif; }
+
+/* ── SPLASH ── */
+#splash {
+  position: fixed; inset: 0;
+  background: #00050f;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.6s ease;
+}
+#splash.hidden { opacity: 0; pointer-events: none; }
+.splash-title {
+  font-size: 2.5rem; font-weight: 900;
+  letter-spacing: 0.4em; color: #00d4ff;
+  text-shadow: 0 0 30px rgba(0,212,255,0.7);
+  margin-bottom: 2.5rem;
+  animation: splashpulse 1.4s ease-in-out infinite;
+}
+@keyframes splashpulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+.splash-bar-wrap {
+  width: 240px; height: 4px;
+  background: #0a1020; border-radius: 2px;
+  overflow: hidden; margin-bottom: 1.2rem;
+}
+.splash-bar {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, #00d4ff, #ffcc00);
+  border-radius: 2px;
+  animation: loadbar 3s ease forwards;
+}
+@keyframes loadbar { 0%{width:0%} 50%{width:65%} 85%{width:90%} 100%{width:100%} }
+.splash-status {
+  font-size: 0.72rem; color: #3a5570;
+  letter-spacing: 0.18em; text-transform: uppercase;
+}
+
+/* ── MAIN CONTENT ── */
+#main-content { opacity: 0; transition: opacity 0.5s ease; }
+#main-content.visible { opacity: 1; }
+
+/* ── BODY ── */
+body {
+  margin: 0; padding: 0;
+  display: flex; flex-direction: column; align-items: center;
+  min-height: 100vh; color: #fff;
+  background:
+    linear-gradient(rgba(0,5,15,0.85), rgba(0,5,15,0.9)),
+    url("{{ url_for('static', filename='hala-tlo.jpg') }}") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* ── LAYOUT ── */
+.container { width: 100%; display: flex; justify-content: center; padding: 20px; }
+.center-stack { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 800px; }
+
+/* ── TYTUŁ ── */
+.title {
+  font-size: 3.5rem; font-weight: 900;
+  text-transform: uppercase; letter-spacing: 8px;
+  color: #00d4ff;
+  text-shadow: 0 0 30px rgba(0,212,255,0.6);
+  margin-top: 100px; margin-bottom: 30px; text-align: center;
+}
+
+/* ── LOGO ── */
+.tech-hero {
+  display: block; margin: 0 auto 50px auto;
+  width: 100%; max-width: 380px;
+  filter: drop-shadow(0 0 20px rgba(0,212,255,0.3));
+  transition: transform 0.3s ease;
+}
+.tech-hero:hover { transform: scale(1.05); }
+
+/* ── FORMULARZ ── */
+.search-form {
+  margin-top: 10px; display: flex; gap: 0px;
+  justify-content: center; position: relative; z-index: 3;
+  width: 100%; max-width: 600px;
+  background: rgba(0,5,15,0.7);
+  padding: 6px; border-radius: 12px;
+  border: 1px solid rgba(0,212,255,0.3);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.search-form input {
+  flex: 1; padding: 15px 20px;
+  border: none; background: transparent;
+  color: white; font-size: 16px; outline: none;
+}
+.search-form input::placeholder { color: rgba(255,255,255,0.4); }
+.search-form button {
+  padding: 0 35px; border-radius: 8px; border: none;
+  background: #00d4ff; color: #000;
+  font-weight: 800; text-transform: uppercase;
+  cursor: pointer; font-size: 15px;
+  box-shadow: 0 0 15px rgba(0,212,255,0.4);
+  transition: background 0.2s, box-shadow 0.2s;
+  min-width: 110px;
+}
+.search-form button:hover { background: #5fe4ff; box-shadow: 0 0 25px rgba(0,212,255,0.7); }
+.search-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── WYNIKI ── */
+.results-box { margin-top: 40px; width: 100%; max-width: 600px; z-index: 2; }
+.results-title {
+  font-size: 14px; color: rgba(255,255,255,0.6);
+  margin-bottom: 15px; padding-left: 5px;
+}
+.result-card {
+  background: rgba(0,10,20,0.85);
+  border: 1px solid rgba(0,212,255,0.4);
+  border-left: 5px solid #00aaff;
+  border-radius: 12px; padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.5);
+  backdrop-filter: blur(5px);
+}
+.result-card > div { margin-bottom: 8px; display: flex; align-items: baseline; gap: 8px; }
+.result-card > div:last-child { margin-bottom: 0; }
+.result-label {
+  color: #ffcc00; font-weight: 800;
+  text-transform: uppercase; font-size: 13px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(255,204,0,0.3);
+  white-space: nowrap;
+}
+.result-value { color: #fff; font-weight: 500; font-size: 16px; }
+
+/* Wyróżnienie lokalizacji form */
+.result-card .highlight-row .result-label { color: #00d4ff; }
+.result-card .highlight-row .result-value {
+  color: #00ffcc; font-weight: 700;
+  text-shadow: 0 0 8px rgba(0,255,200,0.4);
+}
+
+.no-results { color: rgba(255,255,255,0.5); font-size: 15px; padding: 10px 5px; }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .tech-hero { width: 280px; }
+  .title { font-size: 2rem; margin-top: 50px; }
+  .search-form {
+    flex-direction: column;
+    background: transparent; border: none; box-shadow: none;
+  }
+  .search-form input {
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(0,212,255,0.5);
+    border-radius: 10px; margin-bottom: 10px;
+  }
+  .search-form button { border-radius: 10px; padding: 15px; }
+}
+</style>
 </head>
 <body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="splash-title">LOKALIZATOR</div>
+  <div class="splash-bar-wrap"><div class="splash-bar"></div></div>
+  <div class="splash-status" id="splash-msg">Łączenie z serwerem…</div>
+</div>
+
+<!-- APLIKACJA -->
+<div id="main-content">
 <div class="container">
 <div class="center-stack">
-<h1 class="title">LOKALIZATOR</h1>
-<div class="tech-card">
-<div class="circuit-bg"></div>
-<img
-src="{{ url_for('static', filename='technik.png') }}"
-alt="Technik"
-class="tech-hero"
->
-<form method="POST" class="search-form">
-<input
-type="text"
-name="q"
-placeholder="Wpisz numer projektu"
-value="{{ query }}"
-required
->
-<button type="submit">Szukaj</button>
-</form>
-{% if wyniki %}
-<div class="results-box">
-<div class="results-title">
-Znaleziono {{ wyniki|length }} wyników
-</div>
-{% for r in wyniki %}
-<div class="result-card">
-<div>
-<span class="result-label">Projekt:</span>
-<span class="result-value">{{ r.PROJEKT }}</span>
-</div>
-<div>
-<span class="result-label">Miejsce:</span>
-<span class="result-value">{{ r.MIEJSCE }}</span>
-</div>
-<div>
-<span class="result-label">Sekcja:</span>
-<span class="result-value">{{ r.SEKCJA }}</span>
-</div>
-{% if r['MAGAZYN / MASZYNA'] %}
-<div>
-<span class="result-label">Magazyn / Maszyna:</span>
-<span class="result-value">{{ r['MAGAZYN / MASZYNA'] }}</span>
-</div>
-{% endif %}
-{% if r.LOKALIZACJA %}
-<div>
-<span class="result-label">Lokalizacja:</span>
-<span class="result-value">{{ r.LOKALIZACJA }}</span>
-</div>
-{% endif %}
-</div>
-{% endfor %}
-</div>
-{% elif query %}
-<div class="results-box">
-<div class="no-results">
-Brak wyników dla projektu: <strong>{{ query }}</strong>
-</div>
-</div>
-{% endif %}
+
+  <h1 class="title">LOKALIZATOR</h1>
+
+  <div class="tech-card">
+    <img src="{{ url_for('static', filename='technik.png') }}" alt="Technik" class="tech-hero">
+
+    <form method="POST" class="search-form" id="search-form">
+      <input
+        type="text" name="q" id="search-input"
+        placeholder="Wpisz numer projektu"
+        value="{{ query }}" required
+        autocomplete="off" autocorrect="off"
+        autocapitalize="characters" spellcheck="false"
+      >
+      <button type="submit" id="search-btn">
+        <span id="btn-text">SZUKAJ</span>
+        <span id="btn-spinner" style="display:none">⏳</span>
+      </button>
+    </form>
+
+    {% if wyniki %}
+    <div class="results-box">
+      <div class="results-title">
+        Znaleziono {{ wyniki|length }}
+        {% if wyniki|length == 1 %}wynik
+        {% elif wyniki|length < 5 %}wyniki
+        {% else %}wyników{% endif %}
+      </div>
+      {% for r in wyniki %}
+      <div class="result-card">
+        <div><span class="result-label">Projekt:</span><span class="result-value">{{ r.PROJEKT }}</span></div>
+        <div><span class="result-label">Miejsce:</span><span class="result-value">{{ r.MIEJSCE if r.MIEJSCE else '—' }}</span></div>
+        <div><span class="result-label">Sekcja:</span><span class="result-value">{{ r.SEKCJA if r.SEKCJA else '—' }}</span></div>
+        {% if r['MAGAZYN / MASZYNA'] %}
+        <div class="highlight-row"><span class="result-label">Magazyn / Maszyna:</span><span class="result-value">{{ r['MAGAZYN / MASZYNA'] }}</span></div>
+        {% endif %}
+        {% if r.LOKALIZACJA %}
+        <div class="highlight-row"><span class="result-label">Lokalizacja formy:</span><span class="result-value">{{ r.LOKALIZACJA }}</span></div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+    {% elif query %}
+    <div class="results-box">
+      <div class="no-results">Brak wyników dla: <strong>{{ query }}</strong></div>
+    </div>
+    {% endif %}
+
+  </div>
 </div>
 </div>
 </div>
+
+<script>
+  const splash = document.getElementById('splash');
+  const main   = document.getElementById('main-content');
+  const msg    = document.getElementById('splash-msg');
+  const form   = document.getElementById('search-form');
+  const btn    = document.getElementById('search-btn');
+
+  function showApp() {
+    splash.classList.add('hidden');
+    main.classList.add('visible');
+  }
+
+  const msgs = ['Łączenie z serwerem…','Ładowanie danych…','Prawie gotowe…'];
+  let mi = 0;
+  const iv = setInterval(() => { msg.textContent = msgs[++mi % msgs.length]; }, 950);
+
+  window.addEventListener('load', () => {
+    clearInterval(iv);
+    msg.textContent = 'Gotowe!';
+    setTimeout(showApp, 350);
+  });
+
+  // Awaryjne pokazanie po 5s (zimny start Render)
+  setTimeout(showApp, 5000);
+
+  // Spinner podczas szukania
+  form.addEventListener('submit', () => {
+    document.getElementById('btn-text').style.display = 'none';
+    document.getElementById('btn-spinner').style.display = 'inline';
+    btn.disabled = true;
+  });
+
+  // Keep-alive co 10 minut — Render nie zaśnie
+  setInterval(() => fetch('/ping').catch(()=>{}), 600000);
+</script>
 </body>
 </html>
