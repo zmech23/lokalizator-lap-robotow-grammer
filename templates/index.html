@@ -4,36 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lokalizator Łap Robotów</title>
-
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
 <link rel="icon" type="image/png" sizes="192x192"
 href="{{ url_for('static', filename='icon-192.png') }}">
-
 <link rel="apple-touch-icon" sizes="180x180"
 href="{{ url_for('static', filename='icon-180.png') }}">
-
 <link rel="manifest"
 href="{{ url_for('static', filename='manifest.json') }}">
 </head>
-
 <body>
-
 <div class="container">
 <div class="center-stack">
-
 <h1 class="title">LOKALIZATOR</h1>
-
 <div class="tech-card">
-
 <div class="circuit-bg"></div>
-
 <img
 src="{{ url_for('static', filename='technik.png') }}"
 alt="Technik"
 class="tech-hero"
 >
-
 <form method="POST" class="search-form">
 <input
 type="text"
@@ -42,53 +31,51 @@ placeholder="Wpisz numer projektu"
 value="{{ query }}"
 required
 >
-
 <button type="submit">Szukaj</button>
 </form>
-
 {% if wyniki %}
 <div class="results-box">
-
 <div class="results-title">
 Znaleziono {{ wyniki|length }} wyników
 </div>
-
 {% for r in wyniki %}
 <div class="result-card">
-
 <div>
 <span class="result-label">Projekt:</span>
 <span class="result-value">{{ r.PROJEKT }}</span>
 </div>
-
 <div>
 <span class="result-label">Miejsce:</span>
 <span class="result-value">{{ r.MIEJSCE }}</span>
 </div>
-
 <div>
 <span class="result-label">Sekcja:</span>
 <span class="result-value">{{ r.SEKCJA }}</span>
 </div>
-
+{% if r['MAGAZYN / MASZYNA'] %}
+<div>
+<span class="result-label">Magazyn / Maszyna:</span>
+<span class="result-value">{{ r['MAGAZYN / MASZYNA'] }}</span>
+</div>
+{% endif %}
+{% if r.LOKALIZACJA %}
+<div>
+<span class="result-label">Lokalizacja:</span>
+<span class="result-value">{{ r.LOKALIZACJA }}</span>
+</div>
+{% endif %}
 </div>
 {% endfor %}
-
 </div>
-
 {% elif query %}
 <div class="results-box">
-
 <div class="no-results">
 Brak wyników dla projektu: <strong>{{ query }}</strong>
 </div>
-
 </div>
 {% endif %}
-
 </div>
 </div>
 </div>
-
 </body>
 </html>
