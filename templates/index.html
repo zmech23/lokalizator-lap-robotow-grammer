@@ -9,7 +9,7 @@
 <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
 <style>
 /* ── RESET ── */
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: "Segoe UI", system-ui, sans-serif; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 /* ── SPLASH ── */
 #splash {
@@ -17,15 +17,15 @@
   background: #00050f;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  z-index: 9999;
-  transition: opacity 0.6s ease;
+  z-index: 9999; transition: opacity 0.6s ease;
 }
 #splash.hidden { opacity: 0; pointer-events: none; }
 .splash-title {
+  font-family: 'Segoe UI', sans-serif;
   font-size: 2.5rem; font-weight: 900;
   letter-spacing: 0.4em; color: #00d4ff;
   text-shadow: 0 0 30px rgba(0,212,255,0.7);
-  margin-bottom: 2.5rem;
+  margin-bottom: 0.3rem;
   animation: splashpulse 1.4s ease-in-out infinite;
 }
 @keyframes splashpulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
@@ -44,122 +44,189 @@
 .splash-status {
   font-size: 0.72rem; color: #3a5570;
   letter-spacing: 0.18em; text-transform: uppercase;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-/* ── MAIN CONTENT ── */
+/* ── MAIN ── */
 #main-content { opacity: 0; transition: opacity 0.5s ease; }
 #main-content.visible { opacity: 1; }
 
-/* ── BODY ── */
+/* ── BODY — tło na cały ekran ── */
 body {
   margin: 0; padding: 0;
-  display: flex; flex-direction: column; align-items: center;
-  min-height: 100vh; color: #fff;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
   background:
-    linear-gradient(rgba(0,5,15,0.85), rgba(0,5,15,0.9)),
+    linear-gradient(rgba(0,5,15,0.72), rgba(0,5,15,0.85)),
     url("{{ url_for('static', filename='hala-tlo.jpg') }}") no-repeat center center fixed;
   background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* ── LAYOUT ── */
-.container { width: 100%; display: flex; justify-content: center; padding: 20px; }
-.center-stack { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 800px; }
+.page {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 20px 60px;
+  min-height: 100vh;
+}
 
 /* ── TYTUŁ ── */
-.title {
-  font-size: 3.5rem; font-weight: 900;
-  text-transform: uppercase; letter-spacing: 8px;
+.title-block {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.title-main {
+  font-size: clamp(2.6rem, 8vw, 4.2rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
   color: #00d4ff;
-  text-shadow: 0 0 30px rgba(0,212,255,0.6);
-  margin-top: 100px; margin-bottom: 30px; text-align: center;
+  text-shadow:
+    0 0 20px rgba(0,212,255,0.8),
+    0 0 60px rgba(0,212,255,0.3);
+  line-height: 1;
+  display: block;
 }
 
 /* ── LOGO ── */
-.tech-hero {
-  display: block; margin: 0 auto 50px auto;
-  width: 100%; max-width: 380px;
-  filter: drop-shadow(0 0 20px rgba(0,212,255,0.3));
-  transition: transform 0.3s ease;
+.logo-wrap {
+  width: 100%;
+  max-width: 560px;
+  margin: 16px 0 20px;
+  position: relative;
 }
-.tech-hero:hover { transform: scale(1.05); }
+.logo-wrap img {
+  width: 100%;
+  display: block;
+  filter:
+    drop-shadow(0 0 24px rgba(0,212,255,0.45))
+    drop-shadow(0 0 60px rgba(0,212,255,0.15));
+  transition: transform 0.4s ease, filter 0.4s ease;
+  animation: floatlogo 4s ease-in-out infinite;
+}
+@keyframes floatlogo {
+  0%,100% { transform: translateY(0px); }
+  50%      { transform: translateY(-8px); }
+}
+.logo-wrap img:hover {
+  filter: drop-shadow(0 0 36px rgba(0,212,255,0.7));
+  animation-play-state: paused;
+}
 
 /* ── FORMULARZ ── */
+.search-wrap {
+  width: 100%;
+  max-width: 540px;
+}
 .search-form {
-  margin-top: 10px; display: flex; gap: 0px;
-  justify-content: center; position: relative; z-index: 3;
-  width: 100%; max-width: 600px;
-  background: rgba(0,5,15,0.7);
-  padding: 6px; border-radius: 12px;
-  border: 1px solid rgba(0,212,255,0.3);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  display: flex;
+  background: rgba(0,8,20,0.75);
+  border: 1px solid rgba(0,212,255,0.35);
+  border-radius: 14px;
+  padding: 6px;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.5),
+    0 0 0 1px rgba(0,212,255,0.05) inset;
+  backdrop-filter: blur(8px);
 }
 .search-form input {
-  flex: 1; padding: 15px 20px;
-  border: none; background: transparent;
-  color: white; font-size: 16px; outline: none;
+  flex: 1;
+  padding: 14px 18px;
+  background: transparent;
+  border: none; outline: none;
+  color: #fff; font-size: 1rem;
+  letter-spacing: 0.05em;
 }
-.search-form input::placeholder { color: rgba(255,255,255,0.4); }
+.search-form input::placeholder { color: rgba(255,255,255,0.35); }
 .search-form button {
-  padding: 0 35px; border-radius: 8px; border: none;
-  background: #00d4ff; color: #000;
-  font-weight: 800; text-transform: uppercase;
-  cursor: pointer; font-size: 15px;
-  box-shadow: 0 0 15px rgba(0,212,255,0.4);
-  transition: background 0.2s, box-shadow 0.2s;
-  min-width: 110px;
+  padding: 0 32px;
+  border-radius: 10px; border: none;
+  background: #00d4ff;
+  color: #000;
+  font-weight: 800; font-size: 0.95rem;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  cursor: pointer; min-width: 110px;
+  box-shadow: 0 0 18px rgba(0,212,255,0.45);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
 }
-.search-form button:hover { background: #5fe4ff; box-shadow: 0 0 25px rgba(0,212,255,0.7); }
-.search-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+.search-form button:hover {
+  background: #5fe4ff;
+  box-shadow: 0 0 30px rgba(0,212,255,0.7);
+}
+.search-form button:active { transform: scale(0.97); }
+.search-form button:disabled { opacity: 0.55; cursor: not-allowed; }
 
 /* ── WYNIKI ── */
-.results-box { margin-top: 40px; width: 100%; max-width: 600px; z-index: 2; }
+.results-box {
+  margin-top: 32px;
+  width: 100%; max-width: 540px;
+}
 .results-title {
-  font-size: 14px; color: rgba(255,255,255,0.6);
-  margin-bottom: 15px; padding-left: 5px;
+  font-size: 0.8rem; color: rgba(255,255,255,0.45);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 14px; padding-left: 4px;
 }
 .result-card {
-  background: rgba(0,10,20,0.85);
-  border: 1px solid rgba(0,212,255,0.4);
-  border-left: 5px solid #00aaff;
-  border-radius: 12px; padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 0 25px rgba(0,0,0,0.5);
-  backdrop-filter: blur(5px);
+  background: rgba(0,10,22,0.88);
+  border: 1px solid rgba(0,212,255,0.3);
+  border-left: 4px solid #00aaff;
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  animation: cardin 0.3s ease both;
 }
-.result-card > div { margin-bottom: 8px; display: flex; align-items: baseline; gap: 8px; }
+@keyframes cardin { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+.result-card > div {
+  display: flex; align-items: baseline;
+  gap: 10px; margin-bottom: 9px;
+}
 .result-card > div:last-child { margin-bottom: 0; }
 .result-label {
   color: #ffcc00; font-weight: 800;
-  text-transform: uppercase; font-size: 13px;
-  letter-spacing: 1px;
-  text-shadow: 0 0 10px rgba(255,204,0,0.3);
-  white-space: nowrap;
+  font-size: 0.72rem; letter-spacing: 0.1em;
+  text-transform: uppercase; white-space: nowrap;
+  text-shadow: 0 0 8px rgba(255,204,0,0.3);
+  min-width: 140px;
 }
-.result-value { color: #fff; font-weight: 500; font-size: 16px; }
-
-/* Wyróżnienie lokalizacji form */
-.result-card .highlight-row .result-label { color: #00d4ff; }
-.result-card .highlight-row .result-value {
+.result-value {
+  color: #e8f4ff; font-weight: 500; font-size: 0.97rem;
+}
+.highlight-row .result-label { color: #00d4ff; }
+.highlight-row .result-value {
   color: #00ffcc; font-weight: 700;
-  text-shadow: 0 0 8px rgba(0,255,200,0.4);
+  text-shadow: 0 0 10px rgba(0,255,200,0.35);
 }
-
-.no-results { color: rgba(255,255,255,0.5); font-size: 15px; padding: 10px 5px; }
+.no-results {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.9rem; padding: 8px 4px;
+  text-align: center;
+}
 
 /* ── MOBILE ── */
-@media (max-width: 768px) {
-  .tech-hero { width: 280px; }
-  .title { font-size: 2rem; margin-top: 50px; }
-  .search-form {
-    flex-direction: column;
-    background: transparent; border: none; box-shadow: none;
-  }
+@media (max-width: 480px) {
+  .page { padding: 36px 16px 48px; }
+  .logo-wrap { max-width: 420px; }
+  .search-form { flex-direction: column; gap: 0; }
   .search-form input {
-    background: rgba(0,0,0,0.6);
-    border: 1px solid rgba(0,212,255,0.5);
-    border-radius: 10px; margin-bottom: 10px;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(0,212,255,0.4);
+    border-radius: 10px; margin-bottom: 8px;
+    padding: 15px 18px;
   }
-  .search-form button { border-radius: 10px; padding: 15px; }
+  .search-form button {
+    border-radius: 10px; padding: 15px;
+    width: 100%;
+  }
+  .result-label { min-width: 120px; font-size: 0.68rem; }
 }
 </style>
 </head>
@@ -174,14 +241,20 @@ body {
 
 <!-- APLIKACJA -->
 <div id="main-content">
-<div class="container">
-<div class="center-stack">
+<div class="page">
 
-  <h1 class="title">LOKALIZATOR</h1>
+  <!-- TYTUŁ -->
+  <div class="title-block">
+    <span class="title-main">LOKALIZATOR</span>
+  </div>
 
-  <div class="tech-card">
-    <img src="{{ url_for('static', filename='technik.png') }}" alt="Technik" class="tech-hero">
+  <!-- LOGO -->
+  <div class="logo-wrap">
+    <img src="{{ url_for('static', filename='technik.png') }}" alt="Lokalizator">
+  </div>
 
+  <!-- WYSZUKIWARKA -->
+  <div class="search-wrap">
     <form method="POST" class="search-form" id="search-form">
       <input
         type="text" name="q" id="search-input"
@@ -196,6 +269,7 @@ body {
       </button>
     </form>
 
+    <!-- WYNIKI -->
     {% if wyniki %}
     <div class="results-box">
       <div class="results-title">
@@ -206,14 +280,14 @@ body {
       </div>
       {% for r in wyniki %}
       <div class="result-card">
-        <div><span class="result-label">Projekt:</span><span class="result-value">{{ r.PROJEKT }}</span></div>
-        <div><span class="result-label">Miejsce:</span><span class="result-value">{{ r.MIEJSCE if r.MIEJSCE else '—' }}</span></div>
-        <div><span class="result-label">Sekcja:</span><span class="result-value">{{ r.SEKCJA if r.SEKCJA else '—' }}</span></div>
+        <div><span class="result-label">Projekt</span><span class="result-value">{{ r.PROJEKT }}</span></div>
+        <div><span class="result-label">Miejsce łapy</span><span class="result-value">{{ r.MIEJSCE if r.MIEJSCE else '—' }}</span></div>
+        <div><span class="result-label">Sekcja</span><span class="result-value">{{ r.SEKCJA if r.SEKCJA else '—' }}</span></div>
         {% if r['MAGAZYN / MASZYNA'] %}
-        <div class="highlight-row"><span class="result-label">Magazyn / Maszyna:</span><span class="result-value">{{ r['MAGAZYN / MASZYNA'] }}</span></div>
+        <div class="highlight-row"><span class="result-label">Magazyn / Maszyna</span><span class="result-value">{{ r['MAGAZYN / MASZYNA'] }}</span></div>
         {% endif %}
         {% if r.LOKALIZACJA %}
-        <div class="highlight-row"><span class="result-label">Lokalizacja formy:</span><span class="result-value">{{ r.LOKALIZACJA }}</span></div>
+        <div class="highlight-row"><span class="result-label">Lokalizacja formy</span><span class="result-value">{{ r.LOKALIZACJA }}</span></div>
         {% endif %}
       </div>
       {% endfor %}
@@ -226,7 +300,6 @@ body {
     {% endif %}
 
   </div>
-</div>
 </div>
 </div>
 
@@ -248,26 +321,21 @@ body {
   let mi = 0;
   const iv = setInterval(() => { msg.textContent = msgs[++mi % msgs.length]; }, 950);
 
-  // Pokaż aplikację po 2.5s od DOMContentLoaded — nie czekaj na obrazki
   document.addEventListener('DOMContentLoaded', () => {
     clearInterval(iv);
     msg.textContent = 'Gotowe!';
     setTimeout(showApp, 400);
   });
 
-  // Awaryjne pokazanie po 3s — na pewno działa
   setTimeout(showApp, 3000);
 
-  // Spinner podczas szukania
   form && form.addEventListener('submit', () => {
     document.getElementById('btn-text').style.display = 'none';
     document.getElementById('btn-spinner').style.display = 'inline';
     btn.disabled = true;
   });
 
-  // Keep-alive co 10 minut
   setInterval(() => fetch('/ping').catch(()=>{}), 600000);
-
 </script>
 </body>
 </html>
