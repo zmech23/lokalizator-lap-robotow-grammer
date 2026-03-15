@@ -114,19 +114,18 @@ body {
   padding: 0 35px;
   border-radius: 8px;
   border: none;
-  background: #ffcc00; /* Neonowy żółty - spójny z wynikami */
+  background:#00d4ff; /* Powrót do neonowego niebieskiego */
   color: #000;
   font-weight: 800;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.3s ease;
+ box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
 }
 
 .search-form button:hover {
-  background: #ffe066;
-  box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
+  background: #5fe4ff; /* Jaśniejszy błękit po najechaniu */
+  box-shadow: 0 0 25px rgba(0, 212, 255, 0.7);
 }
-
 /* =========================
    7. WYNIKI (Neonowa aktualizacja)
    ========================= */
