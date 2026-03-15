@@ -238,6 +238,8 @@ body {
   const btn    = document.getElementById('search-btn');
 
   function showApp() {
+    if (showApp.done) return;
+    showApp.done = true;
     splash.classList.add('hidden');
     main.classList.add('visible');
   }
@@ -246,24 +248,26 @@ body {
   let mi = 0;
   const iv = setInterval(() => { msg.textContent = msgs[++mi % msgs.length]; }, 950);
 
-  window.addEventListener('load', () => {
+  // Pokaż aplikację po 2.5s od DOMContentLoaded — nie czekaj na obrazki
+  document.addEventListener('DOMContentLoaded', () => {
     clearInterval(iv);
     msg.textContent = 'Gotowe!';
-    setTimeout(showApp, 350);
+    setTimeout(showApp, 400);
   });
 
-  // Awaryjne pokazanie po 5s (zimny start Render)
-  setTimeout(showApp, 5000);
+  // Awaryjne pokazanie po 3s — na pewno działa
+  setTimeout(showApp, 3000);
 
   // Spinner podczas szukania
-  form.addEventListener('submit', () => {
+  form && form.addEventListener('submit', () => {
     document.getElementById('btn-text').style.display = 'none';
     document.getElementById('btn-spinner').style.display = 'inline';
     btn.disabled = true;
   });
 
-  // Keep-alive co 10 minut — Render nie zaśnie
+  // Keep-alive co 10 minut
   setInterval(() => fetch('/ping').catch(()=>{}), 600000);
+
 </script>
 </body>
 </html>
